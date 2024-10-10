@@ -54,8 +54,7 @@
               "RelativeToolTip": "3D ModelViewer\\exLib.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-10T14:30:42.506Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T14:30:42.506Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "3D ModelViewer\\exLib.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-10T14:30:42.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T14:30:42.816Z"
             },
             {
               "$type": "Document",
@@ -80,8 +78,7 @@
               "RelativeToolTip": "3D ModelViewer\\Input.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-10T12:57:01.23Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T12:57:01.23Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,7 @@
               "RelativeToolTip": "3D ModelViewer\\Input.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-10T12:55:04.197Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T12:55:04.197Z"
             },
             {
               "$type": "Document",
@@ -106,8 +102,7 @@
               "RelativeToolTip": "3D ModelViewer\\Frame.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-10T08:24:02.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T08:24:02.362Z"
             },
             {
               "$type": "Document",
@@ -119,8 +114,7 @@
               "RelativeToolTip": "3D ModelViewer\\Frame.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-10T08:19:16.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-10T08:19:16.466Z"
             },
             {
               "$type": "Document",
@@ -132,8 +126,7 @@
               "RelativeToolTip": "3D ModelViewer\\Main.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-09T18:09:26.29Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-09T18:09:26.29Z"
             },
             {
               "$type": "Document",
@@ -143,7 +136,7 @@
               "RelativeDocumentMoniker": "3D ModelViewer\\Main.cpp",
               "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.cpp*",
               "RelativeToolTip": "3D ModelViewer\\Main.cpp*",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAiwG4AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-09T18:09:17.382Z",
               "EditorCaption": ""

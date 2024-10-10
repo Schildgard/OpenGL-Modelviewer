@@ -31,7 +31,7 @@ int main()
 		"\0";
 
 	InitializeExternalLibraries();
- 
+
 	//CREATE WINDOW
 	Frame windowFrame = {};
 	GLFWwindow* glfWindow = windowFrame.InitializeFrame();
@@ -70,7 +70,7 @@ int main()
 	int success;
 	char infoLog[512];//DEFINE MEMORY SPACE FOR ERROR LOG
 	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if(!success)
+	if (!success)
 	{
 		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
 		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << "\n";
@@ -108,7 +108,7 @@ int main()
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);
 
-	glUseProgram(shaderProgram);
+	//glUseProgram(shaderProgram);
 
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
@@ -119,13 +119,32 @@ int main()
 	glEnableVertexAttribArray(0);
 
 
+
+
+	//VAO
+	unsigned int vao;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+
+
+
+
 	//UPDATE
-	while(!glfwWindowShouldClose(glfWindow))
+	while (!glfwWindowShouldClose(glfWindow))
 	{
 		//CLEAR SCREEN
-		glClearColor(0.5f, 0.5f, 0.5f,0);
+		glClearColor(0.5f, 0.5f, 0.5f, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		glUseProgram(shaderProgram);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		//CHECK FOR INPUT
 		input.ProcessInput(glfWindow);
