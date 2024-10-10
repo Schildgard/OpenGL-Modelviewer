@@ -1,0 +1,6 @@
+﻿  Building Custom Rule D:/OpenGL Libraries/glfw-3.4/examples/CMakeLists.txt
+  particles.c
+  tinycthread.c
+  getopt.c
+  Code wird generiert...
+  particles.vcxproj -> D:\OpenGL Libraries\glfw-3.4\build\examples\Debug\particles.exe
