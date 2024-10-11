@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\OpenGL Libraries\Includes;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\OpenGL Libraries\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Student\Desktop\OpenGL Libraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Student\Desktop\OpenGL Libraries\Libs;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -142,6 +142,7 @@
     <ClCompile Include="vbo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicShader.h" />
     <ClInclude Include="exLib.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Main.h" />
@@ -151,6 +152,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\basicFragmentShader.frag" />
+    <None Include="Shader\basicFragmentShader.glsl" />
+    <None Include="Shader\basicVertexShader.glsl" />
     <None Include="Shader\basicVertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

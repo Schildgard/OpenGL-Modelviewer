@@ -56,9 +56,14 @@
     <ClInclude Include="vao.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="BasicShader.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\basicFragmentShader.frag" />
     <None Include="Shader\basicVertexShader.vert" />
+    <None Include="Shader\basicFragmentShader.glsl" />
+    <None Include="Shader\basicVertexShader.glsl" />
   </ItemGroup>
 </Project>
