@@ -32,6 +32,11 @@ int main()
 
 	InitializeExternalLibraries();
 
+
+
+
+
+
 	//CREATE WINDOW
 	Frame windowFrame = {};
 	GLFWwindow* glfWindow = windowFrame.InitializeFrame();
@@ -48,13 +53,11 @@ int main()
 	}
 
 
-	//GENERATE BUFFER FOR AN OBJECT
-	unsigned int vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-	//FILL VBO WITH VERTICES ARRAY (glBufferData fills the currently bound buffer!)
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	//GENERATE VBO
+	unsigned int vbo;
+	VBO bufferobject = {vbo, vertices, sizeof(vertices) };
+	//MUSS DAS BUFFEROBJECT DANACH WIEDER GELÖSCHT WERDEN???
 
 
 
@@ -123,8 +126,8 @@ int main()
 
 	//VAO
 	unsigned int vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
+	VAO VertexArrayObject = { vao };
+
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -162,3 +165,5 @@ int main()
 	glfwTerminate();
 	return 0;
 }
+
+//NEXT STEP READ SHADER FILES AS STRING

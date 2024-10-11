@@ -7,5 +7,7 @@
 #include "Frame.h"
 #include "exLib.h"
 #include "Input.h"
+#include "vbo.h"
+#include "vao.h"
 
 

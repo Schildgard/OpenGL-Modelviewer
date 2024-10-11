@@ -30,6 +30,12 @@
     <ClCompile Include="Input.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="vbo.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="vao.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -44,5 +50,15 @@
     <ClInclude Include="Input.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="vbo.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="vao.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\basicFragmentShader.frag" />
+    <None Include="Shader\basicVertexShader.vert" />
   </ItemGroup>
 </Project>

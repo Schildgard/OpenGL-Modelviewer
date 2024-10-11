@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\Student\Desktop\OpenGL Libraries\Includes;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Student\Desktop\OpenGL Libraries\Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\OpenGL Libraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\OpenGL Libraries\Libs;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -138,12 +138,20 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Frame.cpp" />
+    <ClCompile Include="vao.cpp" />
+    <ClCompile Include="vbo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="exLib.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Frame.h" />
+    <ClInclude Include="vao.h" />
+    <ClInclude Include="vbo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\basicFragmentShader.frag" />
+    <None Include="Shader\basicVertexShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

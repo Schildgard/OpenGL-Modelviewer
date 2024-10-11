@@ -1,38 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\",
+  "WorkspaceRootPath": "D:\\Repository\\3DModelView\\3D ModelViewer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\exLib.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\exLib.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Shader\\basicFragmentShader.frag||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\Shader\\basicFragmentShader.frag||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\exLib.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\exLib.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Shader\\basicVertexShader.vert||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\Shader\\basicVertexShader.vert||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\Input.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\iNPUT.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\iNPUT.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Frame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\Frame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Frame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\Frame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\Main.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\vbo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E9ADC2C5-0017-4893-8B63-1F4B36BA5F85}|3D ModelViewer\\3D ModelViewer.vcxproj|solutionrelative:3D ModelViewer\\vbo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,101 +30,77 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "exLib.cpp",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\exLib.cpp",
-              "RelativeDocumentMoniker": "3D ModelViewer\\exLib.cpp",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\exLib.cpp",
-              "RelativeToolTip": "3D ModelViewer\\exLib.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-10T14:30:42.506Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "exLib.h",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\exLib.h",
-              "RelativeDocumentMoniker": "3D ModelViewer\\exLib.h",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\exLib.h",
-              "RelativeToolTip": "3D ModelViewer\\exLib.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-10T14:30:42.816Z"
+              "Title": "basicVertexShader.vert",
+              "DocumentMoniker": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Shader\\basicVertexShader.vert",
+              "RelativeDocumentMoniker": "3D ModelViewer\\Shader\\basicVertexShader.vert",
+              "ToolTip": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Shader\\basicVertexShader.vert",
+              "RelativeToolTip": "3D ModelViewer\\Shader\\basicVertexShader.vert",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-10-10T21:08:06.499Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Input.cpp",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Input.cpp",
-              "RelativeDocumentMoniker": "3D ModelViewer\\Input.cpp",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Input.cpp",
-              "RelativeToolTip": "3D ModelViewer\\Input.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-10T12:57:01.23Z"
+              "DocumentIndex": 1,
+              "Title": "basicFragmentShader.frag",
+              "DocumentMoniker": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Shader\\basicFragmentShader.frag",
+              "RelativeDocumentMoniker": "3D ModelViewer\\Shader\\basicFragmentShader.frag",
+              "ToolTip": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Shader\\basicFragmentShader.frag",
+              "RelativeToolTip": "3D ModelViewer\\Shader\\basicFragmentShader.frag",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-10-10T21:07:10.727Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Input.h",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Input.h",
-              "RelativeDocumentMoniker": "3D ModelViewer\\Input.h",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Input.h",
-              "RelativeToolTip": "3D ModelViewer\\Input.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-10T12:55:04.197Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Frame.cpp",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Frame.cpp",
-              "RelativeDocumentMoniker": "3D ModelViewer\\Frame.cpp",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Frame.cpp",
-              "RelativeToolTip": "3D ModelViewer\\Frame.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAVAAAAAAAAAA==",
+              "Title": "vbo.cpp",
+              "DocumentMoniker": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\vbo.cpp",
+              "RelativeDocumentMoniker": "3D ModelViewer\\vbo.cpp",
+              "ToolTip": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\vbo.cpp",
+              "RelativeToolTip": "3D ModelViewer\\vbo.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-10T08:24:02.362Z"
+              "WhenOpened": "2024-10-10T20:55:19.864Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Frame.h",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Frame.h",
-              "RelativeDocumentMoniker": "3D ModelViewer\\Frame.h",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Frame.h",
-              "RelativeToolTip": "3D ModelViewer\\Frame.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-10T08:19:16.466Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "Main.h",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.h",
+              "DocumentMoniker": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.h",
               "RelativeDocumentMoniker": "3D ModelViewer\\Main.h",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.h",
+              "ToolTip": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.h",
               "RelativeToolTip": "3D ModelViewer\\Main.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-09T18:09:26.29Z"
+              "WhenOpened": "2024-10-09T18:09:26.29Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Main.cpp",
-              "DocumentMoniker": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.cpp",
+              "DocumentMoniker": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.cpp",
               "RelativeDocumentMoniker": "3D ModelViewer\\Main.cpp",
-              "ToolTip": "D:\\Programming\\Leonard\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.cpp",
+              "ToolTip": "D:\\Repository\\3DModelView\\3D ModelViewer\\3D ModelViewer\\Main.cpp",
               "RelativeToolTip": "3D ModelViewer\\Main.cpp",
-              "ViewState": "AgIAABAAAAAAAAAAAAAiwIUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-09T18:09:17.382Z",
               "EditorCaption": ""
