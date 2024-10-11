@@ -1,6 +1,7 @@
 #include "Main.h"
 
 #include "BasicShader.h"
+#include <string>
 
 
 int main()
@@ -82,7 +83,7 @@ int main()
 
 	basicShader.Use();
 
-
+	basicShader.SetFloat(std::string("offset"), 0.7f);
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
 	{
