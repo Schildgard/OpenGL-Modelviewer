@@ -1,2 +1,5 @@
 ﻿  Main.cpp
-  3D ModelViewer.vcxproj -> D:\Leon\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe
+D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: "e": Unreferenzierte lokale Variable
+  (Quelldatei „Main.cpp“ wird kompiliert)
+  
+  3D ModelViewer.vcxproj -> D:\Repository\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

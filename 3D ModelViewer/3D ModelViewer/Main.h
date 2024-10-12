@@ -9,5 +9,7 @@
 #include "Input.h"
 #include "vbo.h"
 #include "vao.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 

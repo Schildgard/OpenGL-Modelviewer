@@ -59,6 +59,9 @@
     <ClInclude Include="BasicShader.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\basicFragmentShader.frag" />
