@@ -59,7 +59,7 @@ void Texture::AddTextureComponent(unsigned int& _objectID, float* _textureCoods,
 	glBindVertexArray(_objectID);
 
 	//TEXTURE ATTRIB
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(2);
 
 }

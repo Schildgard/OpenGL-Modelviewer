@@ -18,11 +18,11 @@ void Mesh::AddMeshAttributes(unsigned int& _objectID, float* _vertices, unsigned
 	//CREATE BUFFER AND STORE VERTICES IN IT
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, 4 * 8 * sizeof(float), (vertices), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 36 * 5 * sizeof(float), (vertices), GL_STATIC_DRAW);
 
 
 	//POSITION ATTRIB
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 
