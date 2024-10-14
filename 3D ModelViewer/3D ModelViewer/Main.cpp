@@ -3,7 +3,6 @@
 #include "BasicShader.h"
 
 
-
 int main()
 {
 	InitializeExternalLibraries();
@@ -22,7 +21,8 @@ int main()
 		return -1;
 	}
 
-	Shader basicShader("D:/Repository/3DModelView/3D ModelViewer/3D ModelViewer/Shader/basicVertexShader.glsl", "D:/Repository/3DModelView/3D ModelViewer/3D ModelViewer/Shader/basicFragmentShader.glsl");
+	Shader basicShader("Shader/basicVertexShader.glsl", "Shader/basicFragmentShader.glsl");
+
 
 	float vertices[] =
 	{
@@ -36,115 +36,47 @@ int main()
 
 	unsigned int indices[] = { 0,1,2,0,2,3 };
 
-	int width;
-	int height;
-	int nrChannels;
-	unsigned char* data = stbi_load("C:/Users/Leon/Desktop/container.jpg", &width, &height, &nrChannels, 0);
 
+	Object Object = {};
+	Mesh mesh = {};
+	Color color = {};
+	Texture tex = {};
 
-	int width2;
-	int height2;
-	int nrChannels2;
+	//IMAGE 1
+	unsigned char* data = tex.LoadTexture("Images/container.jpg");
+	//IMAGE 2
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char* data2 = stbi_load("C:/Users/Leon/Desktop/awesomeface.png", &width2, &height2, &nrChannels2, 0);
+	unsigned char* data2 = tex.LoadTexture("Images/awesomeface.png");
 
 
-	//Declare Buffer Objects
+
+
+
+
 	unsigned int vao;
-	unsigned int vbo;
-	unsigned int ebo;
+	Object.CreateObject(vao);
+	mesh.AddMeshAttributes(vao, vertices, indices);
+	color.AddColorAttributes(vao, vertices, indices);
 
-	//DEFINE BUFFER OBJECTS
-	glGenVertexArrays(1, &vao);
-	glGenBuffers(1, &vbo);
-	glGenBuffers(1, &ebo);
-	//BIN VAO
-	glBindVertexArray(vao);
-
-
-	//BIND VBO
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-
-	//EBO
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-
-	//VAO2
-	unsigned int vao2;
-	unsigned int vbo2;
-	unsigned int ebo2;
-
-	glGenVertexArrays(1, &vao2);
-	glGenBuffers(1, &vbo2);
-	glGenBuffers(1, &ebo2);
-
-	glBindVertexArray(vao2);
-
-	glBindBuffer(GL_ARRAY_BUFFER, vbo2);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	//POSITION ATTRIB
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	//COLOR ATTRIB
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(1);
-	//TEXTURE ATTRIB
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-	glEnableVertexAttribArray(2);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo2);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	//GENERATE AND BIND TEXTURE
 	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	tex.AddTextureComponent(vao, vertices, indices);
+	tex.BindTexture(vao, data, texture);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-
-	stbi_image_free(data);
-	//GENERATE AND BIND TEXTURE 2
 	unsigned int texture2;
-	glGenTextures(1, &texture2);
-	glBindTexture(GL_TEXTURE_2D, texture2);
+	tex.BindTextureWithAlpha(vao, data2, texture2);
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width2, height2, 0, GL_RGBA, GL_UNSIGNED_BYTE, data2);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	stbi_image_free(data2);
 
 	basicShader.Use();
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "texture2"), 1);
 
 	//IDENTITY MATRIX
-		glm::mat4 trans = glm::mat4(1.0f);
-		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+	glm::mat4 trans = glm::mat4(1.0f);
+	trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+	trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
 
 	unsigned int transformLoc = glGetUniformLocation(basicShader.programID, "transform");
 
-	float test = 0.01f;
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
 	{
@@ -163,7 +95,7 @@ int main()
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 
-		glBindVertexArray(vao2);
+		glBindVertexArray(vao);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 

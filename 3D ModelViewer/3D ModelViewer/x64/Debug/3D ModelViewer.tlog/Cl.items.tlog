@@ -1,7 +1,9 @@
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\exLib.cpp;D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\exLib.obj
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\glad.c;D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\glad.obj
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Input.cpp;D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Input.obj
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp;D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Main.obj
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Frame.cpp;D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Frame.obj
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\vao.cpp;D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\vao.obj
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\vbo.cpp;D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\vbo.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\ColorComponent.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\ColorComponent.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\exLib.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\exLib.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\glad.c;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\glad.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\Input.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Input.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Main.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\Frame.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Frame.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\Mesh.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Mesh.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\Object.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Object.obj
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\TextureComponent.cpp;D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\TextureComponent.obj
