@@ -2,8 +2,4 @@
 D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
   (compiling source file 'Main.cpp')
   
-  TextureComponent.cpp
-D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\TextureComponent.cpp(66,15): warning C4101: 'ebo': unreferenced local variable
-  Generating Code...
-D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\TextureComponent.cpp(12,1): warning C4715: 'Texture::LoadTexture': not all control paths return a value
   3D ModelViewer.vcxproj -> D:\Programming\Leonard\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

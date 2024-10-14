@@ -10,7 +10,7 @@
 #include "exLib.h"
 #include "Input.h"
 #include "Object.h"
-#include "Mesh.h"
+#include "MeshComponent.h"
 #include "ColorComponent.h"
 #include "TextureComponent.h"
 

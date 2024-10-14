@@ -38,6 +38,7 @@ int main()
 
 
 	Object Object = {};
+
 	Mesh mesh = {};
 	Color color = {};
 	Texture tex = {};
@@ -52,30 +53,38 @@ int main()
 
 
 
-
+	//CREATE OBJECT
 	unsigned int vao;
 	Object.CreateObject(vao);
+	// ADD COMPONENTS
 	mesh.AddMeshAttributes(vao, vertices, indices);
 	color.AddColorAttributes(vao, vertices, indices);
 
 	unsigned int texture;
 	tex.AddTextureComponent(vao, vertices, indices);
 	tex.BindTexture(vao, data, texture);
-
 	unsigned int texture2;
 	tex.BindTextureWithAlpha(vao, data2, texture2);
 
 
 	basicShader.Use();
+	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "texture2"), 1);
 
 	//IDENTITY MATRIX
 	glm::mat4 trans = glm::mat4(1.0f);
 	trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
-	trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+	//trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+	trans = glm::translate(trans, glm::vec3(-1.0f, 0.0f, 0.0f));
 
 	unsigned int transformLoc = glGetUniformLocation(basicShader.programID, "transform");
+
+	float offset = 0.001f;
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, texture2);
 
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
@@ -83,21 +92,28 @@ int main()
 		//CLEAR SCREEN
 		glClearColor(0.5f, 0.5f, 0.5f, 0);
 		glClear(GL_COLOR_BUFFER_BIT);
-		//ACTIVATE SHADERPROGRAM
 
-		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
-		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, texture2);
-
+		//BIND OBJECT TO DRAW
 		glBindVertexArray(vao);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
+
+		//TRANSFORM MATRIX
+		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+		trans = glm::translate(trans, glm::vec3(0.0f + offset, 0.0f, 0.0f));
+		// SET MATRIX VALUE TO TRANSFORM UNIFORM
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+		//DRAW OBJECT
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		//RESET MATRIX
+		trans = glm::mat4(1.0f);
+
+
+		//REPEAT FOR SECOND BOX
+		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+		trans = glm::translate(trans, glm::vec3(0.0f - offset, 0.0f, 0.0f));
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		trans = glm::mat4(1.0f);
 
 
 		//CHECK FOR INPUT
@@ -107,7 +123,11 @@ int main()
 		//DRAW ACTUAL SCREEN
 		glfwSwapBuffers(glfWindow);
 
-		trans = glm::mat4(1.0f);
+		offset += 0.01f;
+		if (offset >= 2.5f)
+		{
+			offset = -2.5f;
+		}
 	}
 
 

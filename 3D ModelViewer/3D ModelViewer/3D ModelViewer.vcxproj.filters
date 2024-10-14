@@ -33,7 +33,7 @@
     <ClCompile Include="Object.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
+    <ClCompile Include="MeshComponent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="ColorComponent.cpp">
@@ -65,7 +65,7 @@
     <ClInclude Include="Object.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
+    <ClInclude Include="MeshComponent.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ColorComponent.h">
