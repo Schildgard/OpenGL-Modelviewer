@@ -78,13 +78,34 @@ int main()
 	//trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
 	trans = glm::translate(trans, glm::vec3(-1.0f, 0.0f, 0.0f));
 
-	unsigned int transformLoc = glGetUniformLocation(basicShader.programID, "transform");
+	//unsigned int transformLoc = glGetUniformLocation(basicShader.programID, "transform");
+	unsigned int modelLoc = glGetUniformLocation(basicShader.programID, "model");
+	unsigned int viewLoc = glGetUniformLocation(basicShader.programID, "view");
+	unsigned int projectionLoc = glGetUniformLocation(basicShader.programID, "projection");
+
 
 	float offset = 0.001f;
+	//BIND TEXTURE TO UNIFORM LOCATION !
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, texture2);
+
+	//WHY DOES THE MODEL MATRIX LOOKS LIKE THIS ?
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
+	glm::mat4 view = glm::mat4(1.0f);
+	view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+	glm::mat4 projection = glm::mat4(1.0f);
+	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
+
+	glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
 
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
@@ -97,23 +118,34 @@ int main()
 		glBindVertexArray(vao);
 
 
+
+		////DRAW OBJECT
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+
 		//TRANSFORM MATRIX
-		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
-		trans = glm::translate(trans, glm::vec3(0.0f + offset, 0.0f, 0.0f));
-		// SET MATRIX VALUE TO TRANSFORM UNIFORM
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-		//DRAW OBJECT
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		//RESET MATRIX
-		trans = glm::mat4(1.0f);
+	//trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+	//trans = glm::translate(trans, glm::vec3(0.0f + offset, 0.0f, 0.0f));
+	//// SET MATRIX VALUE TO TRANSFORM UNIFORM
+	//glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+	////DRAW OBJECT
+	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	////RESET MATRIX
+	//trans = glm::mat4(1.0f);
 
 
-		//REPEAT FOR SECOND BOX
-		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
-		trans = glm::translate(trans, glm::vec3(0.0f - offset, 0.0f, 0.0f));
-		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		trans = glm::mat4(1.0f);
+
+
+
+
+
+	//	//REPEAT FOR SECOND BOX
+	//	trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+	//	trans = glm::translate(trans, glm::vec3(0.0f - offset, 0.0f, 0.0f));
+	//	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+	//	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	//	trans = glm::mat4(1.0f);
 
 
 		//CHECK FOR INPUT
@@ -123,11 +155,11 @@ int main()
 		//DRAW ACTUAL SCREEN
 		glfwSwapBuffers(glfWindow);
 
-		offset += 0.01f;
-		if (offset >= 2.5f)
-		{
-			offset = -2.5f;
-		}
+		//offset += 0.0001f;
+		//if (offset >= 2.5f)
+		//{
+		//	offset *= -1;
+		//}
 	}
 
 
