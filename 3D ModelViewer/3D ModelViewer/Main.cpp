@@ -25,12 +25,12 @@ int main()
 	Shader basicShader("D:/Repository/3DModelView/3D ModelViewer/3D ModelViewer/Shader/basicVertexShader.glsl", "D:/Repository/3DModelView/3D ModelViewer/3D ModelViewer/Shader/basicFragmentShader.glsl");
 
 	float vertices[] =
-	{					
-	// positions          // colors           // texture coords
-	-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-	-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 4.0f,    // top left 
-	 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   4.0f, 4.0f,   // top right
-	 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   4.0f, 0.0f,   // bottom right
+	{
+		// positions          // colors           // texture coords
+		-0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 4.0f,    // top left 
+		 0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   4.0f, 4.0f,   // top right
+		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   4.0f, 0.0f,   // bottom right
 
 	};
 
@@ -103,7 +103,7 @@ int main()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo2);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-
+	//GENERATE AND BIND TEXTURE
 	unsigned int texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -118,7 +118,7 @@ int main()
 
 
 	stbi_image_free(data);
-
+	//GENERATE AND BIND TEXTURE 2
 	unsigned int texture2;
 	glGenTextures(1, &texture2);
 	glBindTexture(GL_TEXTURE_2D, texture2);
@@ -134,10 +134,17 @@ int main()
 	stbi_image_free(data2);
 
 	basicShader.Use();
-	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"),0);
+	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "texture2"), 1);
-	
 
+	//IDENTITY MATRIX
+		glm::mat4 trans = glm::mat4(1.0f);
+		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+
+	unsigned int transformLoc = glGetUniformLocation(basicShader.programID, "transform");
+
+	float test = 0.01f;
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
 	{
@@ -146,6 +153,9 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 		//ACTIVATE SHADERPROGRAM
 
+		trans = glm::scale(trans, glm::vec3(0.5, 0.5, 0.5));
+		trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0, 0.0, 1.0));
+		glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
 
 		glActiveTexture(GL_TEXTURE0);
@@ -164,6 +174,8 @@ int main()
 
 		//DRAW ACTUAL SCREEN
 		glfwSwapBuffers(glfWindow);
+
+		trans = glm::mat4(1.0f);
 	}
 
 
