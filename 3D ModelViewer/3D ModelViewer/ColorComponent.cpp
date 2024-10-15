@@ -10,7 +10,22 @@ void Color::AddColorAttributes(unsigned int& _objectID, unsigned int _size, floa
 	unsigned int vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, size, _colorArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, size, colorArray, GL_STATIC_DRAW);
+
+	//COLOR ATTRIB
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(1);
+}
+
+void::Color::AddColorAttributes(unsigned int& _objectID)
+{
+
+	glBindVertexArray(_objectID);
+
+	unsigned int vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, size, colorArray, GL_STATIC_DRAW);
 
 	//COLOR ATTRIB
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);

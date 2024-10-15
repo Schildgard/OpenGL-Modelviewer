@@ -9,5 +9,7 @@ public:
 
 	unsigned int size;
 	float* colorArray;
+
+	void AddColorAttributes(unsigned int& _objectID);
 	void AddColorAttributes(unsigned int& _objectID, unsigned int _size, float* _colorArray);
 };

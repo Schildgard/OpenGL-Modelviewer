@@ -13,6 +13,7 @@
 #include "MeshComponent.h"
 #include "ColorComponent.h"
 #include "TextureComponent.h"
+#include "Matrix.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
