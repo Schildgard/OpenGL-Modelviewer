@@ -10,10 +10,9 @@
 class Matrix
 {
 public:
-	glm::mat4* valuePtr;
 	glm::mat4 values;
 	Matrix();
 
-	void Rotate(unsigned int* _uniformAdress, float _rotationValue, glm::vec3 _axis);
+	void Rotate(unsigned int& _uniformAdress, float _rotationValue, glm::vec3 _axis);
 	void Translate(unsigned int& _uniformAdress, glm::vec3 _movementVector);
 };

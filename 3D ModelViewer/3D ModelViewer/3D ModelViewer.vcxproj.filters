@@ -87,4 +87,9 @@
     <None Include="Shader\basicFragmentShader.glsl" />
     <None Include="Shader\basicVertexShader.glsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\Garumak.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
