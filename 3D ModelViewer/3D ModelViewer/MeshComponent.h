@@ -10,7 +10,9 @@ public:
 	float* vertices;
 	unsigned int* indices;
 
+	unsigned int size;
+
 	Mesh();
 
-	void AddMeshAttributes(unsigned int& _objectID, float* _vertices, unsigned int* _indices);
+	void AddMeshComponent(unsigned int& _objectID, float* _vertices, unsigned int* _indices, unsigned int _size);
 };

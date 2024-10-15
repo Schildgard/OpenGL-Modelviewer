@@ -15,7 +15,6 @@ void Texture::BindTexture(unsigned int& _objectID, unsigned char* _data, unsigne
 {
 	glBindVertexArray(_objectID);
 
-
 	glGenTextures(1, &_textureID);
 	glBindTexture(GL_TEXTURE_2D, _textureID);
 
@@ -54,12 +53,21 @@ void Texture::BindTextureWithAlpha(unsigned int& _objectID, unsigned char* _data
 
 
 
-void Texture::AddTextureComponent(unsigned int& _objectID, float* _textureCoods, unsigned int* _indices)
+void Texture::AddTextureComponent(unsigned int& _objectID, unsigned int _size, float* _textureCoods)
 {
+
+	size = _size;
+	textureCoods = _textureCoods;
+
 	glBindVertexArray(_objectID);
 
+	unsigned int vbo;
+	glGenBuffers(1,&vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, size, textureCoods, GL_STATIC_DRAW);
+
 	//TEXTURE ATTRIB
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
 
 }

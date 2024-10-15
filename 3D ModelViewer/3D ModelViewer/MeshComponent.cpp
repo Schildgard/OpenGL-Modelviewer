@@ -5,12 +5,13 @@ Mesh::Mesh()
 
 }
 
-void Mesh::AddMeshAttributes(unsigned int& _objectID, float* _vertices, unsigned int* _indices)
+void Mesh::AddMeshComponent(unsigned int& _objectID, float* _vertices, unsigned int* _indices, unsigned int _size)
 {
 
 	glBindVertexArray(_objectID);
 	vertices = _vertices;
 	indices = _indices;
+	size = _size;
 
 	unsigned int vbo;
 	unsigned int ebo;
@@ -18,11 +19,11 @@ void Mesh::AddMeshAttributes(unsigned int& _objectID, float* _vertices, unsigned
 	//CREATE BUFFER AND STORE VERTICES IN IT
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, 36 * 5 * sizeof(float), (vertices), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, size , (vertices), GL_STATIC_DRAW);
 
 
 	//POSITION ATTRIB
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 

@@ -6,5 +6,8 @@
 class Color
 {
 public:
-	void AddColorAttributes(unsigned int& _objectID, float* _colorValues, unsigned int* _indices);
+
+	unsigned int size;
+	float* colorArray;
+	void AddColorAttributes(unsigned int& _objectID, unsigned int _size, float* _colorArray);
 };
