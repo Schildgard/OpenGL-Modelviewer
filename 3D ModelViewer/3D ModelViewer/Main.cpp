@@ -40,9 +40,14 @@ int main()
 	float lastFrame = 0.0f;
 	deltaTimePtr = &deltaTime;
 
+
+	//Camera SceneCamera = {};
 	//CREATE INPUT HANDLING
+	//Input input(&SceneCamera);
 	Input input = {};
-	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	//glfwSetCursorPosCallback(glfWindow, input.MouseCallBack);
 
 
 

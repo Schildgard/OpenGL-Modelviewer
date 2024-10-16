@@ -10,7 +10,7 @@ public:
 	//STANDARD CONSTRUCTOR
 	Frame();
 
-	GLFWwindow* frame;
+	//GLFWwindow* frame;
 	GLFWwindow* InitializeFrame();
 
 	//void Framebuffer_Size_Callback(GLFWwindow* _window, int _width, int _height);

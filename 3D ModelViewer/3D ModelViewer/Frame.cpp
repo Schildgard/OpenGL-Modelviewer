@@ -36,7 +36,7 @@ GLFWwindow* Frame::InitializeFrame()
 
 
 	//DEFINE FRAME SCALABILITY
-	glfwSetFramebufferSizeCallback(frame, Framebuffer_Size_Callback);
+	//glfwSetFramebufferSizeCallback(frame, Framebuffer_Size_Callback);
 }
 
 

@@ -1,8 +1,13 @@
 #include "Input.h"
 
+//Input::Input(Camera* _cam)
+//{
+//	cam = _cam;
+//	glfwSetCursorPosCallback(frame, MouseCallBack);
+//}
+
 Input::Input()
 {
-
 }
 
 void Input::ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _camFront, glm::vec3* _camUp, float* _deltaTime)
@@ -35,13 +40,43 @@ void Input::ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _ca
 
 void Input::MouseCallBack(GLFWwindow* _window, double _xPos, double _yPos)
 {
-	//CALCULATE HOW MUCH THE MOUSE HAS MOVED
-	float xOffset = _xPos - lastXPos;
-	float yOffset = _yPos - lastYPos;
-	// UPDATE LAST POSITION VALUES
-	lastXPos = currentXPos;
-	lastYPos = currentYPos;
-	// SCALE OFFSET DOWN BY SENSIVITY PARAMETER
-	xOffset *= sensivity;
-	yOffset *= sensivity;
+//if (firstMouse)
+//{
+//	lastXPos = _xPos;
+//	lastYPos = _yPos;
+//	firstMouse = false;
+//}
+//
+//
+////CALCULATE HOW MUCH THE MOUSE HAS MOVED
+//float xOffset = _xPos - lastXPos;
+//float yOffset = lastYPos - _yPos;
+//// UPDATE LAST POSITION VALUES
+//lastXPos = _xPos;
+//lastYPos = _yPos;
+//
+//// SCALE OFFSET DOWN BY SENSIVITY PARAMETER
+//xOffset *= sensitivity;
+//yOffset *= sensitivity;
+//
+////SET HORIZONTAL AND VERTICAL POS TO OFFSET
+//cam[0].horizontal += xOffset;
+//cam[0].vertical += yOffset;
+//
+//// CLAMP VERTICAL CAMERA ANGLE
+//if (cam[0].vertical > 89.0f)
+//{
+//	cam[0].vertical = 89.0f;
+//}
+//else if (cam[0].vertical < -89.0f)
+//{
+//	cam[0].vertical = -89.0f;
+//}
+//
+////CALCULATE ACTUAL DIRECTION VECTOR
+//glm::vec3 direction;
+//direction.x = cos(glm::radians(cam[0].horizontal)) * cos(glm::radians(cam[0].vertical));
+//direction.y = sin(glm::radians(cam[0].vertical));
+//direction.z = sin(glm::radians(cam[0].horizontal)) * cos(glm::radians(cam[0].vertical));
+//cam[0].camForward = glm::normalize(direction);
 };
