@@ -1,13 +1,6 @@
 ﻿  Main.cpp
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
-  (compiling source file 'Main.cpp')
+D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: "e": Unreferenzierte lokale Variable
+  (Quelldatei „Main.cpp“ wird kompiliert)
   
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(341,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(364,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(365,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(371,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(372,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(374,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(375,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  3D ModelViewer.vcxproj -> D:\MKaul\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe
+D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(340,29): warning C4244: "=": Konvertierung von "double" in "float", möglicher Datenverlust
+  3D ModelViewer.vcxproj -> D:\Repository\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

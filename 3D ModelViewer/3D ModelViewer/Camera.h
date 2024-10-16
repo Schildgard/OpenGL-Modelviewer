@@ -13,37 +13,17 @@ enum Camera_Movement {
 	RIGHT
 };
 
-
-// Default camera values
-const float yaw = -90.0f;
-const float pitch = 0.0f;
-const float speed = 2.5f;
-const float sensivity = 0.1f;
-const float zoom = 45.0f;
-
-
 class Camera
 {
 public:
-
 	Camera() {};
-	// CAMERA ATTRIBUTES
-	glm::vec3 camPos;
-	glm::vec3 camForward;
-	glm::vec3 camUp;
-	glm::vec3 camRight;
-	glm::vec3 worldUp;
-
-	//EULER ANGLES
-	float horizontal;
-	float vertical;
-
-	//CAMERA OPTIONS
-	float movementSpeed;
-	float mouseSensivity;
-	float camZoom;
-
-
+	// DEFAULT CAMERA SETTINGS
+	glm::vec3 position = glm::vec3(0.0f, 0.0f, 3.0f);
+	glm::vec3 forward = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 upward = glm::vec3(0.0f, 1.0f, 0.0f);
+	float horizontal = -90.0f; // horizontal 0.0f points to the positive x axis, so -90f points towards negative z axis which is our forward direction
+	float vertical = 0.0f;
+	float fov = 45.0f;
 };
 
 

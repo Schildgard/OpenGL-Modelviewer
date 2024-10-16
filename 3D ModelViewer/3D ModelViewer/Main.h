@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-#include "Frame.h"
+//#include "Frame.h"
 #include "exLib.h"
 #include "Input.h"
 #include "Object.h"
@@ -14,6 +14,7 @@
 #include "ColorComponent.h"
 #include "TextureComponent.h"
 #include "Matrix.h"
+#include "Camera.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

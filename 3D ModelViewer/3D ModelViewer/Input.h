@@ -6,17 +6,19 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Camera.h"
+
 
 class Input
 {
 public:
-	GLFWwindow* frame;
+	static Input* currentInstance;
 
-	//Camera* cam;
+	Camera* cam;
 	Input();
-	//Input(Camera* _cam);
-	float speed;
+	Input(Camera* _cam);
 
+	float speed;
 	// MOUSE VARIABLES
 	bool firstMouse;
 	float sensitivity = 0.01f;
@@ -31,5 +33,6 @@ public:
 	void ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _camFront, glm::vec3* _camUp, float* _deltaTime);
 
 
-	void MouseCallBack(GLFWwindow* _window, double _xPos, double _yPos);
+	static void MouseCallBack(GLFWwindow* _window, double _xPos, double _yPos);
+	void HandleMouseInput(GLFWwindow* _window, double _xPos, double _yPos);
 };

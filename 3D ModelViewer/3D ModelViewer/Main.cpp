@@ -2,8 +2,12 @@
 
 #include "BasicShader.h"
 
-void mouseCallBack(GLFWwindow* _window, double _xPos, double _yPos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+void Framebuffer_Size_Callback(GLFWwindow* _window, int _width, int _height);
+
+//WINDOW SETTINGS
+int width = 800;
+int height = 600;
 
 //MOUSE SETTINGS
 // SET MOUSE POS AT MIDDLE OF THE SCREEN
@@ -12,23 +16,30 @@ float lastXPos = 400;
 float lastYPos = 300;
 float sensitivity = 0.1f;
 
-//CAMERA SETTINGS
-glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 3.0f);
-glm::vec3 camFront = glm::vec3(0.0f, 0.0f, -1.0f);
-glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
-float horizontal = -90.0f; // horizontal 0.0f points to the positive x axis, so -90f points towards negative z axis which is our forward direction
-float vertical = 0.0f;
-float fov = 45.0f;
 
 int main()
 {
 	InitializeExternalLibraries();
 
 	//CREATE WINDOW
-	Frame windowFrame = {};
-	GLFWwindow* glfWindow = windowFrame.InitializeFrame();
+	GLFWwindow* glfWindow = glfwCreateWindow(width, height, "LearnOpenGL", NULL, NULL);
+	if (glfWindow == NULL)
+	{
+		std::cout << "Window creation failed miserably!\n";
+		return -1;
+	}
+	else
+	{
+		std::cout << "Window creation sucessfull!\n";
+		//SPECIFIZE TO USE GLFW VERSION 3.3
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		//SPECIFY TO USE GLFW CORE PROFILE AND NOT IMMEDIATE
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		//DEFINE FRAME SCALABILITY
+		glfwSetFramebufferSizeCallback(glfWindow, Framebuffer_Size_Callback);
+	}
 	glfwMakeContextCurrent(glfWindow);
-	glfwSetCursorPosCallback(glfWindow, mouseCallBack);
 
 
 
@@ -41,13 +52,13 @@ int main()
 	deltaTimePtr = &deltaTime;
 
 
-	//Camera SceneCamera = {};
+	Camera SceneCamera = {};
 	//CREATE INPUT HANDLING
-	//Input input(&SceneCamera);
-	Input input = {};
-	//glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	Input input2(&SceneCamera);
+	Input::currentInstance = &input2;
+	glfwSetCursorPosCallback(glfWindow, Input::MouseCallBack);
+	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);;
 
-	//glfwSetCursorPosCallback(glfWindow, input.MouseCallBack);
 
 
 
@@ -275,20 +286,6 @@ int main()
 
 
 
-	// CAMERA
-
-	// DEFINE CAMERA POSITION AND DIRECTION
-//glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-//glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-//glm::vec3 camDir = (cameraPos - camTarget);
-//
-//// DEFINE CAMERA X AND Y AXIS
-//glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-//glm::vec3 camRight = glm::normalize(glm::cross(worldUp, camDir));
-//glm::vec3 camUp = (glm::normalize(glm::cross(camDir, camRight)));
-
-
-
 
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
@@ -300,7 +297,8 @@ int main()
 		//BIND OBJECT TO DRAW
 		glBindVertexArray(vao);
 
-		view2.LookAt(viewLoc, camPos, camFront, camUp);
+		//view2.LookAt(viewLoc, camPos, camFront, camUp);
+		view2.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 
 		//OBJECT 1 MANIPULATION
 		model2.values = glm::translate(model2.values, glm::vec3(0.0f, 0.0f, 0.0f));
@@ -332,7 +330,8 @@ int main()
 
 
 		//CHECK FOR INPUT
-		input.ProcessInput(glfWindow, &camPos, &camFront, &camUp, deltaTimePtr);
+		//input2.ProcessInput(glfWindow, &camPos, &camFront, &camUp, deltaTimePtr);
+		input2.ProcessInput(glfWindow, &SceneCamera.position, &SceneCamera.forward, &SceneCamera.upward, deltaTimePtr);
 		glfwPollEvents();
 
 		//DRAW ACTUAL SCREEN
@@ -353,54 +352,11 @@ int main()
 	glfwTerminate();
 	return 0;
 }
-
-
-
-void mouseCallBack(GLFWwindow* _window, double _xPos, double _yPos)
-{
-
-	if (firstMouse)
-	{
-		lastXPos = _xPos;
-		lastYPos = _yPos;
-		firstMouse = false;
-	}
-
-
-	//CALCULATE HOW MUCH THE MOUSE HAS MOVED
-	float xOffset = _xPos - lastXPos;
-	float yOffset =  lastYPos - _yPos;
-	// UPDATE LAST POSITION VALUES
-	lastXPos = _xPos;
-	lastYPos = _yPos;
-
-	// SCALE OFFSET DOWN BY SENSIVITY PARAMETER
-	xOffset *= sensitivity;
-	yOffset *= sensitivity;
-
-	//SET HORIZONTAL AND VERTICAL POS TO OFFSET
-	horizontal += xOffset;
-	vertical += yOffset;
-
-	// CLAMP VERTICAL CAMERA ANGLE
-	if (vertical > 89.0f)
-	{
-		vertical = 89.0f;
-	}
-	else if (vertical < -89.0f)
-	{
-		vertical = -89.0f;
-	}
-
-	//CALCULATE ACTUAL DIRECTION VECTOR
-	glm::vec3 direction;
-	direction.x = cos(glm::radians(horizontal)) * cos(glm::radians(vertical));
-	direction.y = sin(glm::radians(vertical));
-	direction.z = sin(glm::radians(horizontal)) * cos(glm::radians(vertical));
-	camFront = glm::normalize(direction);
-
-}
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 
+}
+void Framebuffer_Size_Callback(GLFWwindow* _window, int _width, int _height)
+{
+	glViewport(0, 0, _width, _height);
 }
