@@ -80,6 +80,9 @@
     <ClInclude Include="Matrix.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\basicFragmentShader.frag" />

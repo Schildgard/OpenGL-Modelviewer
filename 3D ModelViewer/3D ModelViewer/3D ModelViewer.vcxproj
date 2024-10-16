@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicShader.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="ColorComponent.h" />
     <ClInclude Include="exLib.h" />
     <ClInclude Include="Input.h" />

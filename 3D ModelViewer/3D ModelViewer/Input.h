@@ -9,17 +9,21 @@
 class Input
 {
 public:
-	Input(glm::vec3* _camPos, glm::vec3* _camFront, glm::vec3* _camUp, float* _deltaTime);
-	glm::vec3* camPosition;
-	glm::vec3* camFront;
-	glm::vec3* camUp;
-	float* deltaTime;
+
+	Input();
 	float speed;
 
-	double xPos;
-	double yPos;
+	// MOUSE VARIABLES
+	// SET MOUSE POS AT MIDDLE OF THE SCREEN
+	float lastXPos = 400.0f;
+	float lastYPos = 300.0f;
 
-	void ProcessInput(GLFWwindow* _window);
+	double currentXPos;
+	double currentYPos;
+
+	float sensivity = 0.01f;
+
+	void ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _camFront, glm::vec3* _camUp, float* _deltaTime);
 
 	void MouseCallBack(GLFWwindow* _window, double _xPos, double _yPos);
 

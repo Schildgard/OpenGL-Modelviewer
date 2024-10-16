@@ -2,6 +2,23 @@
 
 #include "BasicShader.h"
 
+void mouseCallBack(GLFWwindow* _window, double _xPos, double _yPos);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+
+//MOUSE SETTINGS
+// SET MOUSE POS AT MIDDLE OF THE SCREEN
+bool firstMouse = true;
+float lastXPos = 400;
+float lastYPos = 300;
+float sensitivity = 0.1f;
+
+//CAMERA SETTINGS
+glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 camFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
+float horizontal = -90.0f; // horizontal 0.0f points to the positive x axis, so -90f points towards negative z axis which is our forward direction
+float vertical = 0.0f;
+float fov = 45.0f;
 
 int main()
 {
@@ -11,20 +28,10 @@ int main()
 	Frame windowFrame = {};
 	GLFWwindow* glfWindow = windowFrame.InitializeFrame();
 	glfwMakeContextCurrent(glfWindow);
+	glfwSetCursorPosCallback(glfWindow, mouseCallBack);
 
 
-	//CAMERA SETTINGS
-	glm::vec3* camPosPtr;
-	glm::vec3* camFrontPtr;
-	glm::vec3* camUpPtr;
 
-	glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 3.0f);
-	glm::vec3 camFront = glm::vec3(0.0f, 0.0f, -1.0f);
-	glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	camPosPtr = &camPos;
-	camFrontPtr = &camFront;
-	camUpPtr = &camUp;
 
 	//FRAME RATE HANDLING
 	float* deltaTimePtr;
@@ -34,8 +41,12 @@ int main()
 	deltaTimePtr = &deltaTime;
 
 	//CREATE INPUT HANDLING
-	Input input(camPosPtr,camFrontPtr,camUpPtr, deltaTimePtr);
+	Input input = {};
 	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+
+
+
 
 	//CHECK IF GLAD CAN LOAD FUNCTION POINTERS
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -188,26 +199,10 @@ int main()
 
 	Object Object = {};
 	Texture tex = {}; //TODO EXTRACT LOAD TEXTURE FUNCTION SO IT IS NOT PERFORMED BY AN OBJECT OF TEXTURE CLASS BUT BY ITS CLASS ITSELF
-
-
-
 	//IMAGE 1
 	unsigned char* crate = tex.LoadTexture("Images/container.jpg");
 	//IMAGE 2
-
-
-	//stbi_set_flip_vertically_on_load(true);
-	int x;
-	int y;
-	int channels;
-
-	unsigned char* smiley = tex.LoadTexture("Images/awesomeface.png");
-
 	unsigned char* cat = tex.LoadTexture("Images/Garumak512.png");
-
-
-
-
 
 
 
@@ -231,7 +226,6 @@ int main()
 	color.colorArray = colorArray;
 	color.size = sizeof(colorArray);
 	color.AddColorAttributes(vao);
-
 
 	//ADD TEXTURES
 	//tex.AddTextureComponent(vao, sizeof(textureCoods), textureCoods);
@@ -291,8 +285,6 @@ int main()
 
 
 
-
-
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
 	{
@@ -307,27 +299,27 @@ int main()
 
 		//OBJECT 1 MANIPULATION
 		model2.values = glm::translate(model2.values, glm::vec3(0.0f, 0.0f, 0.0f));
-		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//OBJECT 2 MANIPULATION
 		model2.values = glm::translate(model2.values, glm::vec3(1.0f));
-		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//OBJECT 3 MANIPULATION
 		model2.values = glm::translate(model2.values, glm::vec3(-1.0f));
-		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//OBJECT 4 MANIPULATION
 		model2.values = glm::translate(model2.values, glm::vec3(1.5f, 0.0f, 0.0f));
-		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//OBJECT 5 MANIPULATION
 		model2.values = glm::translate(model2.values, glm::vec3(-1.5f, 0.0f, 0.0f));
-		model2.Rotate(modelLoc, glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 
@@ -335,26 +327,75 @@ int main()
 
 
 		//CHECK FOR INPUT
-		input.ProcessInput(glfWindow);
-		glfwSetCursorPosCallback(glfWindow, input.MouseCallBack);
+		input.ProcessInput(glfWindow, &camPos, &camFront, &camUp, deltaTimePtr);
 		glfwPollEvents();
 
 		//DRAW ACTUAL SCREEN
 		glfwSwapBuffers(glfWindow);
 
-		offset += 0.01f;
-		if (offset >= 2.5f)
-		{
-			offset *= -1;
-		}
-
 		currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-	}
 
+
+		if (offset >= 2.0f)
+		{
+			offset *= -1;
+		}
+	}
 
 	//EXIT
 	glfwTerminate();
 	return 0;
+}
+
+
+
+void mouseCallBack(GLFWwindow* _window, double _xPos, double _yPos)
+{
+
+	if (firstMouse)
+	{
+		lastXPos = _xPos;
+		lastYPos = _yPos;
+		firstMouse = false;
+	}
+
+
+	//CALCULATE HOW MUCH THE MOUSE HAS MOVED
+	float xOffset = _xPos - lastXPos;
+	float yOffset =  lastYPos - _yPos;
+	// UPDATE LAST POSITION VALUES
+	lastXPos = _xPos;
+	lastYPos = _yPos;
+
+	// SCALE OFFSET DOWN BY SENSIVITY PARAMETER
+	xOffset *= sensitivity;
+	yOffset *= sensitivity;
+
+	//SET HORIZONTAL AND VERTICAL POS TO OFFSET
+	horizontal += xOffset;
+	vertical += yOffset;
+
+	// CLAMP VERTICAL CAMERA ANGLE
+	if (vertical > 89.0f)
+	{
+		vertical = 89.0f;
+	}
+	else if (vertical < -89.0f)
+	{
+		vertical = -89.0f;
+	}
+
+	//CALCULATE ACTUAL DIRECTION VECTOR
+	glm::vec3 direction;
+	direction.x = cos(glm::radians(horizontal)) * cos(glm::radians(vertical));
+	direction.y = sin(glm::radians(vertical));
+	direction.z = sin(glm::radians(horizontal)) * cos(glm::radians(vertical));
+	camFront = glm::normalize(direction);
+
+}
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+
 }
