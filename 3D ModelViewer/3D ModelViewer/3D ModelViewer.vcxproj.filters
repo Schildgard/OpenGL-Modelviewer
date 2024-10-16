@@ -24,9 +24,6 @@
     <ClCompile Include="glad.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="exLib.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -51,9 +48,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Frame.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="exLib.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">

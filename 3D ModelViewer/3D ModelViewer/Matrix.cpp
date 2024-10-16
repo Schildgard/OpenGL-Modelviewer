@@ -26,4 +26,12 @@ void Matrix::LookAt(unsigned int& _uniformAdress, glm::vec3 _position, glm::vec3
 	values = glm::mat4(1.0f);
 }
 
+void Matrix::Zoom(unsigned int& _uniformAdress, float _distance, float _widthDivheight, float _minDistance, float _maxDistance)
+{
+	values = glm::perspective(_distance, _widthDivheight, _minDistance, _maxDistance);
+	glUniformMatrix4fv(_uniformAdress, 1, GL_FALSE, glm::value_ptr(values));
+	values = glm::mat4(1.0f);
+
+}
+
 

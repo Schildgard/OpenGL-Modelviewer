@@ -15,14 +15,13 @@ Input* Input::currentInstance = nullptr;
 
 void Input::ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _camFront, glm::vec3* _camUp, float* _deltaTime)
 {
-	speed = 2.5f * (*_deltaTime);
+	speed = 5.0f * (*_deltaTime);
 	if (glfwGetKey(_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(_window, true);
 	}
 	if (glfwGetKey(_window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		//*camPosition += (speed * *camFront);
 		*_camPos += (speed * *_camFront);
 	}
 	if (glfwGetKey(_window, GLFW_KEY_S) == GLFW_PRESS)
@@ -41,7 +40,7 @@ void Input::ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _ca
 	}
 }
 
- void Input::MouseCallBack(GLFWwindow* _window, double _xPos, double _yPos)
+ void Input::MouseCallback(GLFWwindow* _window, double _xPos, double _yPos)
 {
 	 if(currentInstance)
 	 {
@@ -50,6 +49,15 @@ void Input::ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _ca
 
 
 }
+ void Input::ScrollCallback(GLFWwindow* _window, double _xOffset, double _yOffset)
+ {
+	 if (currentInstance)
+	 {
+		 currentInstance->HandleScrollInput(_window, _xOffset, _yOffset);
+	 }
+ }
+
+
  void Input::HandleMouseInput(GLFWwindow* _window, double _xPos, double _yPos)
  {
 	 if (firstMouse)
@@ -91,5 +99,18 @@ void Input::ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _ca
 	 direction.y = sin(glm::radians(cam[0].vertical));
 	 direction.z = sin(glm::radians(cam[0].horizontal)) * cos(glm::radians(cam[0].vertical));
 	 cam[0].forward = glm::normalize(direction);
+ }
+
+ void Input::HandleScrollInput(GLFWwindow* _window, double _xOffset, double _yOffset)
+ {
+	 cam[0].fov -= (float)_yOffset;
+	 if (cam[0].fov < 1.0f)
+	 {
+		 cam[0].fov = 1.0f;
+	 }
+	 else if(cam[0].fov > 45.0f)
+	 {
+		 cam[0].fov = 45.0f;
+	 }
  }
  

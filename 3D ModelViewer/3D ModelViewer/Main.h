@@ -6,8 +6,7 @@
 #include <iostream>
 
 
-//#include "Frame.h"
-#include "exLib.h"
+#include "Frame.h"
 #include "Input.h"
 #include "Object.h"
 #include "MeshComponent.h"

@@ -33,6 +33,9 @@ public:
 	void ProcessInput(GLFWwindow* _window, glm::vec3* _camPos, glm::vec3* _camFront, glm::vec3* _camUp, float* _deltaTime);
 
 
-	static void MouseCallBack(GLFWwindow* _window, double _xPos, double _yPos);
+	static void MouseCallback(GLFWwindow* _window, double _xPos, double _yPos);
+	static void ScrollCallback(GLFWwindow* window, double _xOffset, double _yOffset);
+
 	void HandleMouseInput(GLFWwindow* _window, double _xPos, double _yPos);
+	void HandleScrollInput(GLFWwindow* _window, double _xOffset, double _yOffset);
 };
