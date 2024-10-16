@@ -15,4 +15,5 @@ public:
 
 	void Rotate(unsigned int& _uniformAdress, float _rotationValue, glm::vec3 _axis);
 	void Translate(unsigned int& _uniformAdress, glm::vec3 _movementVector);
+	void LookAt(unsigned int& _uniformAdress, glm::vec3 _position, glm::vec3 _target, glm::vec3 _worldUp);
 };

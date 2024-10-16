@@ -1,13 +1,2 @@
-﻿  Main.cpp
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
-  (compiling source file 'Main.cpp')
-  
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(279,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(280,13): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(309,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(310,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(176,6): warning C4101: 'channels': unreferenced local variable
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(175,6): warning C4101: 'y': unreferenced local variable
-D:\MKaul\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(174,6): warning C4101: 'x': unreferenced local variable
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  3D ModelViewer.vcxproj -> D:\MKaul\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe
+﻿  Input.cpp
+  3D ModelViewer.vcxproj -> D:\Repository\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

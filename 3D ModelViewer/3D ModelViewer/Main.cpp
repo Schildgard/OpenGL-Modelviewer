@@ -11,8 +11,31 @@ int main()
 	Frame windowFrame = {};
 	GLFWwindow* glfWindow = windowFrame.InitializeFrame();
 	glfwMakeContextCurrent(glfWindow);
+
+
+	//CAMERA SETTINGS
+	glm::vec3* camPosPtr;
+	glm::vec3* camFrontPtr;
+	glm::vec3* camUpPtr;
+
+	glm::vec3 camPos = glm::vec3(0.0f, 0.0f, 3.0f);
+	glm::vec3 camFront = glm::vec3(0.0f, 0.0f, -1.0f);
+	glm::vec3 camUp = glm::vec3(0.0f, 1.0f, 0.0f);
+
+	camPosPtr = &camPos;
+	camFrontPtr = &camFront;
+	camUpPtr = &camUp;
+
+	//FRAME RATE HANDLING
+	float* deltaTimePtr;
+	float deltaTime = 0.0f;
+	float currentFrame = 0.0f;
+	float lastFrame = 0.0f;
+	deltaTimePtr = &deltaTime;
+
 	//CREATE INPUT HANDLING
-	Input input = {};
+	Input input(camPosPtr,camFrontPtr,camUpPtr, deltaTimePtr);
+	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	//CHECK IF GLAD CAN LOAD FUNCTION POINTERS
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -23,6 +46,9 @@ int main()
 
 	Shader basicShader("Shader/basicVertexShader.glsl", "Shader/basicFragmentShader.glsl");
 	basicShader.Use();
+	glEnable(GL_DEPTH_TEST);
+
+
 	float vertices3D[]
 	{
 	-0.5f, -0.5f, -0.5f,
@@ -238,15 +264,13 @@ int main()
 
 
 	//WHY DOES THE MODEL MATRIX LOOKS LIKE THIS ?
-	glm::mat4 model = glm::mat4(1.0f);
+	//glm::mat4 model = glm::mat4(1.0f);
 	//model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	Matrix model2 = {};
 	Matrix view2 = {};
 
 	glm::mat4 projection = glm::mat4(1.0f);
-
-
 	projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
 	glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -255,31 +279,18 @@ int main()
 	// CAMERA
 
 	// DEFINE CAMERA POSITION AND DIRECTION
-	glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-	glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::vec3 camDir = (cameraPos - camTarget);
-	// DEFINE CAMERA X AND Y AXIS
-	glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	glm::vec3 camRight = glm::normalize(glm::cross(worldUp, camDir));
-	glm::vec3 camUp = (glm::normalize(glm::cross(camDir, camRight)));
+//glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+//glm::vec3 camTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+//glm::vec3 camDir = (cameraPos - camTarget);
+//
+//// DEFINE CAMERA X AND Y AXIS
+//glm::vec3 worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+//glm::vec3 camRight = glm::normalize(glm::cross(worldUp, camDir));
+//glm::vec3 camUp = (glm::normalize(glm::cross(camDir, camRight)));
 
 
-	glm::mat4 camView = glm::lookAt
-	(
-		glm::vec3(0.0f, 0.0f, 3.0f),//POSITION 
-		glm::vec3(0.0f, 0.0f, 0.0f),//TARGET
-		glm::vec3(0.0f, 1.0f, 0.0f)//WORLD UP
-	);
 
 
-	glEnable(GL_DEPTH_TEST);
-
-
-	const float radius = 10.0f;
-	float camX = sin(glfwGetTime()) * radius;
-	float camZ = cos(glfwGetTime()) * radius;
-	//glm::mat4 moveCamView = glm::mat4(1.0f);
-	//moveCamView = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 
 
 	//UPDATE
@@ -289,63 +300,43 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		basicShader.Use();
-
-		camX = (float)(sin(glfwGetTime()) * radius);
-		camZ = (float)(cos(glfwGetTime()) * radius);
-		glm::mat4 moveCamView = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(moveCamView));
-
 		//BIND OBJECT TO DRAW
 		glBindVertexArray(vao);
 
+		view2.LookAt(viewLoc, camPos, camFront, camUp);
 
 		//OBJECT 1 MANIPULATION
-		model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-		//view2.Translate(viewLoc, glm::vec3(0.0f + offset, 0.0f, -5.0 + offset));
+		model2.values = glm::translate(model2.values, glm::vec3(0.0f, 0.0f, 0.0f));
+		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//OBJECT 2 MANIPULATION
+		model2.values = glm::translate(model2.values, glm::vec3(1.0f));
+		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
+		//OBJECT 3 MANIPULATION
+		model2.values = glm::translate(model2.values, glm::vec3(-1.0f));
+		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		camX = sin(glfwGetTime()) * radius;
-		camZ = cos(glfwGetTime()) * radius;
-		moveCamView = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(moveCamView));
+		//OBJECT 4 MANIPULATION
+		model2.values = glm::translate(model2.values, glm::vec3(1.5f, 0.0f, 0.0f));
+		model2.Rotate(modelLoc,  glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-	////OBJECT 2 MANIPULATION
-	//
-	//camX = sin(glfwGetTime()) * radius;
-	//camZ = cos(glfwGetTime()) * radius;
-	//moveCamView = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-	//
-	//model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-	//view2.Translate(viewLoc, glm::vec3(0.0f - offset, 0.0f, -5.0 - offset));
-	//glDrawArrays(GL_TRIANGLES, 0, 36);
-	//
-	////OBJECT 3 MANIPULATION
-	//
-	//camX = sin(glfwGetTime()) * radius;
-	//camZ = cos(glfwGetTime()) * radius;
-	//moveCamView = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-	//
-	//model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-	//view2.Translate(viewLoc, glm::vec3(0.0f, -0.0f + offset, -5.0));
-	//glDrawArrays(GL_TRIANGLES, 0, 36);
-	//
-	////OBJECT 4 MANIPULATION
-	//
-	//camX = sin(glfwGetTime()) * radius;
-	//camZ = cos(glfwGetTime()) * radius;
-	//moveCamView = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-	//
-	//model2.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-	//view2.Translate(viewLoc, glm::vec3(0.0f, 0.0f - offset, -5.0));
-	//glDrawArrays(GL_TRIANGLES, 0, 36);
+		//OBJECT 5 MANIPULATION
+		model2.values = glm::translate(model2.values, glm::vec3(-1.5f, 0.0f, 0.0f));
+		model2.Rotate(modelLoc, glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
 
 
 
 
 		//CHECK FOR INPUT
 		input.ProcessInput(glfWindow);
+		glfwSetCursorPosCallback(glfWindow, input.MouseCallBack);
 		glfwPollEvents();
 
 		//DRAW ACTUAL SCREEN
@@ -356,6 +347,10 @@ int main()
 		{
 			offset *= -1;
 		}
+
+		currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 	}
 
 
