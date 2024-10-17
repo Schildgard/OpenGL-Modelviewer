@@ -35,7 +35,7 @@ int main()
 	Input::currentInstance = &input2;
 	glfwSetCursorPosCallback(glfWindow, Input::MouseCallback);
 	glfwSetScrollCallback(glfWindow, Input::ScrollCallback);
-	//glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);;
+	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);;
 
 	Shader basicShader("Shader/basicVertexShader.glsl", "Shader/basicFragmentShader.glsl");
 	basicShader.Use();
@@ -189,7 +189,7 @@ int main()
 	};
 	int sizeOfObjectArray = sizeof(objectPositions) / sizeof(objectPositions[0]);
 
-//	Object Object = {};
+	//	Object Object = {};
 	Texture tex = {}; //TODO EXTRACT LOAD TEXTURE FUNCTION SO IT IS NOT PERFORMED BY AN OBJECT OF TEXTURE CLASS BUT BY ITS CLASS ITSELF
 	//IMAGE 1
 	unsigned char* crate = tex.LoadTexture("Images/container.jpg");
@@ -197,34 +197,31 @@ int main()
 	unsigned char* cat = tex.LoadTexture("Images/Garumak512.png");
 
 
-	//CREATE OBJECT
-	unsigned int vao;
-
 	// ADD MESH 
 	Mesh mesh = {};
 	//mesh.AddMeshComponent(vao, vertices3D, indices, sizeof(vertices3D));
 	mesh.vertices = vertices3D;
 	mesh.indices = indices;
 	mesh.size = sizeof(vertices3D);
-	mesh.AddMeshComponent(vao);
+	mesh.AddMeshComponent();
 
 	//ADD COLOR
 	Color color = {};
 	//color.AddColorAttributes(vao, sizeof(colorArray), colorArray);
 	color.colorArray = colorArray;
 	color.size = sizeof(colorArray);
-	color.AddColorAttributes(vao);
+	color.AddColorAttributes(mesh.objectID);
 
 	//ADD TEXTURES
 	//tex.AddTextureComponent(vao, sizeof(textureCoods), textureCoods);
 	tex.textureCoods = textureCoods;
 	tex.size = sizeof(textureCoods);
-	tex.AddTextureComponent(vao);
+	tex.AddTextureComponent(mesh.objectID);
 
 	unsigned int crateTextureID;
-	tex.BindTexture(vao, crate, crateTextureID);
+	tex.BindTexture(mesh.objectID, crate, crateTextureID);
 	unsigned int catTextureID;
-	tex.BindTextureWithAlpha(vao, cat, catTextureID);
+	tex.BindTextureWithAlpha(mesh.objectID, cat, catTextureID);
 
 	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
@@ -254,7 +251,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		basicShader.Use();
-		glBindVertexArray(vao);
+		glBindVertexArray(mesh.objectID);
 
 
 		//SET CAMERA POSITION

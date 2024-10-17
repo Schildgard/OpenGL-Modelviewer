@@ -21,7 +21,7 @@ public:
 	float speed;
 	// MOUSE VARIABLES
 	bool firstMouse;
-	float sensitivity = 0.01f;
+	float sensitivity = 0.05f;
 	// SET MOUSE POS AT MIDDLE OF THE SCREEN
 	float lastXPos = 400.0f;
 	float lastYPos = 300.0f;

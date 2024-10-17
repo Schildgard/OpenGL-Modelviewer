@@ -5,10 +5,10 @@ Mesh::Mesh()
 
 }
 
-void Mesh::AddMeshComponent(unsigned int& _objectID)
+void Mesh::AddMeshComponent()
 {
-	glGenVertexArrays(1, &_objectID);
-	glBindVertexArray(_objectID);
+	glGenVertexArrays(1, &objectID);
+	glBindVertexArray(objectID);
 
 	unsigned int vbo;
 	unsigned int ebo;
