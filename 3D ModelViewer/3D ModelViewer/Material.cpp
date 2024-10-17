@@ -3,16 +3,50 @@
 
 Material::Material()
 {
-//unsigned int vbo;
-//glGenBuffers(1, &vbo);
-//glBindBuffer(GL_ARRAY_BUFFER, vbo);
-//glBufferData(GL_ARRAY_BUFFER, size, colorArray, GL_STATIC_DRAW);
-//
-////COLOR ATTRIB
-//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-//glEnableVertexAttribArray(1);
+	textureCoods = new float[2 * 36]
+		{
+				0.0f, 0.0f,
+				1.0f, 0.0f,
+				1.0f, 1.0f,
+				1.0f, 1.0f,
+				0.0f, 1.0f,
+				0.0f, 0.0f,
 
+				0.0f, 0.0f,
+				1.0f, 0.0f,
+				1.0f, 1.0f,
+				1.0f, 1.0f,
+				0.0f, 1.0f,
+				0.0f, 0.0f,
 
+				1.0f, 0.0f,
+				1.0f, 1.0f,
+				0.0f, 1.0f,
+				0.0f, 1.0f,
+				0.0f, 0.0f,
+				1.0f, 0.0f,
+
+				1.0f, 0.0f,
+				1.0f, 1.0f,
+				0.0f, 1.0f,
+				0.0f, 1.0f,
+				0.0f, 0.0f,
+				1.0f, 0.0f,
+
+				0.0f, 1.0f,
+				1.0f, 1.0f,
+				1.0f, 0.0f,
+				1.0f, 0.0f,
+				0.0f, 0.0f,
+				0.0f, 1.0f,
+
+				0.0f, 1.0f,
+				1.0f, 1.0f,
+				1.0f, 0.0f,
+				1.0f, 0.0f,
+				0.0f, 0.0f,
+				0.0f, 1.0f
+		};
 };
 void Material::AddColorAttributes(unsigned int& _objectID)
 {

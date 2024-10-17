@@ -203,17 +203,17 @@ int main()
 	mesh.size = sizeof(vertices3D);
 	mesh.AddMeshComponent();
 
-	Texture tex = {}; //TODO EXTRACT LOAD TEXTURE FUNCTION SO IT IS NOT PERFORMED BY AN OBJECT OF TEXTURE CLASS BUT BY ITS CLASS ITSELF
 	//ADD TEXTURES
-	//tex.AddTextureComponent(vao, sizeof(textureCoods), textureCoods);
-	tex.textureCoods = textureCoods;
-	tex.size = sizeof(textureCoods);
-	tex.AddTextureComponent(mesh.objectID);
+//	Texture tex = {};
+//	//tex.AddTextureComponent(vao, sizeof(textureCoods), textureCoods);
+//	tex.textureCoods = textureCoods;
+//	tex.size = sizeof(textureCoods);
+//	tex.AddTextureComponent(mesh.objectID);
 
 	unsigned int crateTextureID;
-	tex.BindTexture(mesh.objectID, crate, crateTextureID);
+	mesh.BindTexture(mesh.objectID, crate, crateTextureID);
 	unsigned int catTextureID;
-	tex.BindTextureWithAlpha(mesh.objectID, cat, catTextureID);
+	mesh.BindTextureWithAlpha(mesh.objectID, cat, catTextureID);
 
 	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);

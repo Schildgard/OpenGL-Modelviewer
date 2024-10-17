@@ -11,13 +11,11 @@ public:
 	static int width;
 	static int height ;
 	static int nrChannels;
+	static unsigned char* LoadTexture(const char* _filepath);
 
 	unsigned int size;
 	float* textureCoods;
 
-
-
-	static unsigned char* LoadTexture(const char* _filepath);
 
 	void BindTexture(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID);
 	void BindTextureWithAlpha(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID);

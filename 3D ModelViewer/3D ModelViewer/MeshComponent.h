@@ -19,4 +19,8 @@ public:
 	Mesh();
 	void AddMeshComponent();
 	void AddMeshComponent(float* _vertices, unsigned int* _indices, unsigned int _size);
+
+
+	void BindTexture(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID);
+	void BindTextureWithAlpha(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID);
 };
