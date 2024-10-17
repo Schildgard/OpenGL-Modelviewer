@@ -140,7 +140,6 @@
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="TextureComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +151,6 @@
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="MeshComponent.h" />
-    <ClInclude Include="Object.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="TextureComponent.h" />
   </ItemGroup>

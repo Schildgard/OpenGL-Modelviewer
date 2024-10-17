@@ -8,7 +8,6 @@
 
 #include "Frame.h"
 #include "Input.h"
-#include "Object.h"
 #include "MeshComponent.h"
 #include "ColorComponent.h"
 #include "TextureComponent.h"

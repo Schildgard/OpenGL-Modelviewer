@@ -27,9 +27,6 @@
     <ClCompile Include="Input.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="MeshComponent.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -57,9 +54,6 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="stb_image.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Object.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="MeshComponent.h">

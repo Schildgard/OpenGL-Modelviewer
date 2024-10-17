@@ -189,7 +189,7 @@ int main()
 	};
 	int sizeOfObjectArray = sizeof(objectPositions) / sizeof(objectPositions[0]);
 
-	Object Object = {};
+//	Object Object = {};
 	Texture tex = {}; //TODO EXTRACT LOAD TEXTURE FUNCTION SO IT IS NOT PERFORMED BY AN OBJECT OF TEXTURE CLASS BUT BY ITS CLASS ITSELF
 	//IMAGE 1
 	unsigned char* crate = tex.LoadTexture("Images/container.jpg");
@@ -199,7 +199,6 @@ int main()
 
 	//CREATE OBJECT
 	unsigned int vao;
-	Object.CreateObject(vao);
 
 	// ADD MESH 
 	Mesh mesh = {};

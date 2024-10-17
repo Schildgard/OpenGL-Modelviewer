@@ -7,7 +7,7 @@ Mesh::Mesh()
 
 void Mesh::AddMeshComponent(unsigned int& _objectID)
 {
-
+	glGenVertexArrays(1, &_objectID);
 	glBindVertexArray(_objectID);
 
 	unsigned int vbo;
@@ -34,12 +34,14 @@ void Mesh::AddMeshComponent(unsigned int& _objectID)
 
 void Mesh::AddMeshComponent(unsigned int& _objectID, float* _vertices, unsigned int* _indices, unsigned int _size)
 {
-
-
-	glBindVertexArray(_objectID);
 	vertices = _vertices;
 	indices = _indices;
 	size = _size;
+
+
+	glGenVertexArrays(1, &_objectID);
+	glBindVertexArray(_objectID);
+
 
 	unsigned int vbo;
 	unsigned int ebo;
