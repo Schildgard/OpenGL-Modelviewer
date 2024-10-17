@@ -189,12 +189,10 @@ int main()
 	};
 	int sizeOfObjectArray = sizeof(objectPositions) / sizeof(objectPositions[0]);
 
-	//	Object Object = {};
-	Texture tex = {}; //TODO EXTRACT LOAD TEXTURE FUNCTION SO IT IS NOT PERFORMED BY AN OBJECT OF TEXTURE CLASS BUT BY ITS CLASS ITSELF
 	//IMAGE 1
-	unsigned char* crate = tex.LoadTexture("Images/container.jpg");
+	unsigned char* crate = Texture:: LoadTexture("Images/container.jpg");
 	//IMAGE 2
-	unsigned char* cat = tex.LoadTexture("Images/Garumak512.png");
+	unsigned char* cat = Texture:: LoadTexture("Images/Garumak512.png");
 
 
 	// ADD MESH 
@@ -205,13 +203,7 @@ int main()
 	mesh.size = sizeof(vertices3D);
 	mesh.AddMeshComponent();
 
-	//ADD COLOR
-	Color color = {};
-	//color.AddColorAttributes(vao, sizeof(colorArray), colorArray);
-	color.colorArray = colorArray;
-	color.size = sizeof(colorArray);
-	color.AddColorAttributes(mesh.objectID);
-
+	Texture tex = {}; //TODO EXTRACT LOAD TEXTURE FUNCTION SO IT IS NOT PERFORMED BY AN OBJECT OF TEXTURE CLASS BUT BY ITS CLASS ITSELF
 	//ADD TEXTURES
 	//tex.AddTextureComponent(vao, sizeof(textureCoods), textureCoods);
 	tex.textureCoods = textureCoods;

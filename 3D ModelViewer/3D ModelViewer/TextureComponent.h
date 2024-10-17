@@ -8,16 +8,16 @@
 class Texture
 {
 public:
-	int width;
-	int height;
-	int nrChannels;
+	static int width;
+	static int height ;
+	static int nrChannels;
 
 	unsigned int size;
 	float* textureCoods;
 
 
 
-	unsigned char* LoadTexture(const char* _filepath);
+	static unsigned char* LoadTexture(const char* _filepath);
 
 	void BindTexture(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID);
 	void BindTextureWithAlpha(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID);
