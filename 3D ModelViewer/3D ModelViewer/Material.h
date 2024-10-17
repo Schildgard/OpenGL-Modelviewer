@@ -6,17 +6,61 @@
 #include "TextureComponent.h"
 
 class Material
-{ 
+{
 public:
-	Material();
 	//COLOR
 	unsigned int size;
 	float* colorArray;
-	void AddColorAttributes(unsigned int& _objectID);
 
 	//TEXTURE
 	unsigned int textureSize;
-	float* textureCoods;
+	float textureCoods[2 * 36] =
+	{
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			1.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 0.0f,
 
-	Texture texture;
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			1.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 0.0f,
+
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 1.0f,
+			0.0f, 0.0f,
+			1.0f, 0.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+			0.0f, 1.0f,
+
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 0.0f,
+			1.0f, 0.0f,
+			0.0f, 0.0f,
+			0.0f, 1.0f
+	};
+
+
+	//Texture* texture;
+	unsigned int textureId1;
+	unsigned int textureId2;
 };

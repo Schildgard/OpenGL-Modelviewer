@@ -8,9 +8,9 @@ Mesh::Mesh()
 
 void Mesh::AddMeshComponent()
 {
+	//SET VALUES FOR STANDARD MATERIAL STANDARD MATERIAL
 	material.size = 3 * size;
 	material.colorArray = new float[3 * size];
-
 	material.textureSize = 2 * size;
 
 	for (int i = 0; i < material.size; i++)
@@ -18,7 +18,7 @@ void Mesh::AddMeshComponent()
 		material.colorArray[i] = 1.0f;
 	}
 
-
+	//CREATE AND BIND OBJECT
 	glGenVertexArrays(1, &objectID);
 	glBindVertexArray(objectID);
 
@@ -41,19 +41,6 @@ void Mesh::AddMeshComponent()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
 
-
-
-
-
-
-	//TEXTURE ATTRIB
-	unsigned int textureBuffer;
-	glGenBuffers(1, &textureBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer);
-	glBufferData(GL_ARRAY_BUFFER, material.textureSize, material.textureCoods, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(2);
 
 
 	//SET ELEMENT BUFFER FOR INDICES
@@ -99,12 +86,22 @@ void Mesh::AddMeshComponent(float* _vertices, unsigned int* _indices, unsigned i
 }
 
 
-void Mesh::BindTexture(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID)
+void Mesh::BindTexture(unsigned char* _data)
 {
-	glBindVertexArray(_objectID);
 
-	glGenTextures(1, &_textureID);
-	glBindTexture(GL_TEXTURE_2D, _textureID);
+	//TEXTURE ATTRIB
+	unsigned int textureBuffer1;
+	glGenBuffers(1, &textureBuffer1);
+	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer1);
+	glBufferData(GL_ARRAY_BUFFER, material.textureSize, material.textureCoods, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(2);
+
+
+
+	glGenTextures(1, &material.textureId1);
+	glBindTexture(GL_TEXTURE_2D, material.textureId1);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -118,12 +115,20 @@ void Mesh::BindTexture(unsigned int& _objectID, unsigned char* _data, unsigned i
 
 }
 
-void Mesh::BindTextureWithAlpha(unsigned int& _objectID, unsigned char* _data, unsigned int& _textureID)
+void Mesh::BindTextureWithAlpha(unsigned char* _data)
 {
-	glBindVertexArray(_objectID);
+	//TEXTURE ATTRIB
+	unsigned int textureBuffer2;
+	glGenBuffers(1, &textureBuffer2);
+	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer2);
+	glBufferData(GL_ARRAY_BUFFER, material.textureSize, material.textureCoods, GL_STATIC_DRAW);
 
-	glGenTextures(1, &_textureID);
-	glBindTexture(GL_TEXTURE_2D, _textureID);
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(3);
+
+
+	glGenTextures(1, &material.textureId2);
+	glBindTexture(GL_TEXTURE_2D, material.textureId2);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

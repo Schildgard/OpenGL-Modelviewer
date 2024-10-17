@@ -138,7 +138,6 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Frame.cpp" />
-    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="TextureComponent.cpp" />

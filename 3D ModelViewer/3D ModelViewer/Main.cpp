@@ -190,9 +190,9 @@ int main()
 	int sizeOfObjectArray = sizeof(objectPositions) / sizeof(objectPositions[0]);
 
 	//IMAGE 1
-	unsigned char* crate = Texture:: LoadTexture("Images/container.jpg");
+	unsigned char* crate = Texture::LoadTexture("Images/container.jpg");
 	//IMAGE 2
-	unsigned char* cat = Texture:: LoadTexture("Images/Garumak512.png");
+	unsigned char* cat = Texture::LoadTexture("Images/Garumak512.png");
 
 
 	// ADD MESH 
@@ -203,21 +203,14 @@ int main()
 	mesh.size = sizeof(vertices3D);
 	mesh.AddMeshComponent();
 
-	//ADD TEXTURES
-//	Texture tex = {};
-//	//tex.AddTextureComponent(vao, sizeof(textureCoods), textureCoods);
-//	tex.textureCoods = textureCoods;
-//	tex.size = sizeof(textureCoods);
-//	tex.AddTextureComponent(mesh.objectID);
-
-	unsigned int crateTextureID;
-	mesh.BindTexture(mesh.objectID, crate, crateTextureID);
-	unsigned int catTextureID;
-	mesh.BindTextureWithAlpha(mesh.objectID, cat, catTextureID);
+	mesh.BindTexture(crate);
+	mesh.BindTextureWithAlpha(cat);
 
 	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "texture2"), 1);
+	//SET BOOL TO USE TEXTURES TO TRUE OR FALSE
+	glUniform1i(glGetUniformLocation(basicShader.programID, "useTexture"), 1);
 
 
 	//TRANSFORMATION MATRICES
@@ -228,9 +221,9 @@ int main()
 
 	//BIND TEXTURE TO UNIFORM LOCATION !
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, crateTextureID);
+	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1);
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, catTextureID);
+	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId2);
 
 
 	Matrix identityMatrix = {};
