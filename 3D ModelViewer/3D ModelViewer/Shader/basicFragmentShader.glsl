@@ -7,16 +7,22 @@ uniform sampler2D ourTexture;
 uniform sampler2D texture2;
 uniform bool useTexture = true;
 
+uniform vec3 lightColor;
+float ambientIntesity = 0.5f;
+
 void main()
 {
+	vec3 ambient = lightColor * ambientIntesity;
+	vec3 result = ambient*ourColor;
 
-if(useTexture)
-{
-FragColor = texture(ourTexture,texCood) * ((texture(texture2,texCood) * vec4(1.0f)));
-}
-else
-{
+	if(useTexture)
+	{
+	//FragColor = texture(ourTexture,texCood) * ((texture(texture2,texCood) * vec4(ourColor,1.0f)));
+	FragColor = texture(ourTexture,texCood) * ((texture(texture2,texCood) * vec4(result,1.0f)));
+	}
+	else
+	{
 	FragColor = vec4(ourColor, 1.0f);
-}
+	}
 
 }

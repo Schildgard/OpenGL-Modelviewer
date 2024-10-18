@@ -2,5 +2,5 @@
 D:\Leon\Graphics Programming\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
   (compiling source file 'Main.cpp')
   
-D:\Leon\Graphics Programming\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(294,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\Leon\Graphics Programming\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp(326,29): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   3D ModelViewer.vcxproj -> D:\Leon\Graphics Programming\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

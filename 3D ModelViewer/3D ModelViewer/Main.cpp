@@ -191,12 +191,13 @@ int main()
 		glm::vec3(1.5f, 0.0f,0.0f),
 		glm::vec3(-1.5f, 0.0f,0.0f)
 	};
-	int sizeOfObjectArray = sizeof(objectPositions) / sizeof(objectPositions[0]);
+	int sizeOfObjectArray = std::size(objectPositions);
 
 	//IMAGE 1
 	unsigned char* crate = Texture::LoadTexture("Images/container.jpg");
 	//IMAGE 2
 	unsigned char* cat = Texture::LoadTexture("Images/Garumak512.png");
+
 
 
 	// ADD MESH 
@@ -213,6 +214,11 @@ int main()
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "texture2"), 1);
 
+	//BIND TEXTURE TO UNIFORM LOCATION !
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1);
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId2);
 
 	//TRANSFORMATION MATRICES
 	unsigned int modelLoc = glGetUniformLocation(basicShader.programID, "model");
@@ -223,27 +229,44 @@ int main()
 	unsigned int viewLoc2 = glGetUniformLocation(lightSourceShader.programID, "view");
 	unsigned int projectionLoc2 = glGetUniformLocation(lightSourceShader.programID, "projection");
 
+	unsigned int modelLoc3 = glGetUniformLocation(lightShader.programID, "model");
+	unsigned int viewLoc3 = glGetUniformLocation(lightShader.programID, "view");
+	unsigned int projectionLoc3 = glGetUniformLocation(lightShader.programID, "projection");
 
-	//BIND TEXTURE TO UNIFORM LOCATION !
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1);
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId2);
+
+
 
 
 	Light lightObject = {};
 	Light::currentInstance = &lightObject;
-	Light::CreateLightSource(&lightObject.objectID, vertices3D, indices, sizeof(vertices3D));
+	//Light::CreateLightSource(&lightObject.objectID, vertices3D, indices, sizeof(vertices3D));
+	lightObject.vertices = vertices3D;
+	lightObject.indices = indices;
+	lightObject.size = sizeof(vertices3D);
+	Light::CreateLightSource();
+
+
+
+	Mesh reflector = {};
+	reflector.vertices = vertices3D;
+	reflector.indices = indices;
+	reflector.size = sizeof(vertices3D);
+	reflector.AddMeshComponent();
 
 
 
 	//LIGHTING SHADER ATTRIBUTES
-//	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
-//	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-//	lightShader.Use();
-//	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
-//	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
+	glm::vec3 objectColor = glm::vec3(0.0f, 0.5f, 0.31f);
+	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	lightShader.Use();
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
 
+
+	//BASIC SHADER LIGHTING ATTRIBUTES
+	glm::vec3 lightColor2 = glm::vec3(1.0f, 0.0f, 1.0f);
+	basicShader.Use();
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "lightColor"), 1, glm::value_ptr(lightColor2));
 
 	Matrix identityMatrix = {};
 
@@ -254,34 +277,43 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+		//DRAW OBJECTS
 		basicShader.Use();
 		//SET CAMERA POSITION
 		identityMatrix.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 		glBindVertexArray(mesh.objectID);
-
-
-		//DRAW OBJECTS
 		for (int i = 0; i < sizeOfObjectArray; i++)
 		{
 			identityMatrix.values = glm::translate(identityMatrix.values, objectPositions[i]);
 			identityMatrix.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
-		//identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(2.0f, -1.0f, 0.0f));
-		//identityMatrix.Rotate(modelLoc, (float)glfwGetTime()* glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
-		//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 
 		//DRAW LIGHT SOURCE
+		//SET CAMERA POSITION
 		lightSourceShader.Use();
 		identityMatrix.LookAt(viewLoc2, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc2, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
-	
+
 		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(2.0f, -1.0f, 0.0f));
-		identityMatrix.Rotate(modelLoc2, (float)glfwGetTime()* glm::radians(50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		identityMatrix.Rotate(modelLoc2, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glBindVertexArray(lightObject.objectID);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		//DRAW REFLECTOR OBJECT
+		//SET CAMERA POSITION
+		lightShader.Use();
+		identityMatrix.LookAt(viewLoc3, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
+		identityMatrix.Zoom(projectionLoc3, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
+
+		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(-2.0f, 1.0f, 0.0f));
+		identityMatrix.Rotate(modelLoc3, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glBindVertexArray(reflector.objectID);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
 
 		//CHECK FOR INPUT
 		input2.ProcessInput(glfWindow, &SceneCamera.position, &SceneCamera.forward, &SceneCamera.upward, deltaTimePtr);
