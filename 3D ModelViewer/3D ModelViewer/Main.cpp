@@ -38,6 +38,7 @@ int main()
 	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);;
 
 	Shader basicShader("Shader/basicVertexShader.glsl", "Shader/basicFragmentShader.glsl");
+	Shader lightShader("Shader/LightingVertexShader.glsl", "Shader/LightingFragmentShader.glsl");
 	basicShader.Use();
 	glEnable(GL_DEPTH_TEST);
 
@@ -197,7 +198,6 @@ int main()
 
 	// ADD MESH 
 	Mesh mesh = {};
-	//mesh.AddMeshComponent(vao, vertices3D, indices, sizeof(vertices3D));
 	mesh.vertices = vertices3D;
 	mesh.indices = indices;
 	mesh.size = sizeof(vertices3D);
@@ -209,9 +209,6 @@ int main()
 	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "texture2"), 1);
-	//SET BOOL TO USE TEXTURES TO TRUE OR FALSE
-	glUniform1i(glGetUniformLocation(basicShader.programID, "useTexture"), 1);
-
 
 	//TRANSFORMATION MATRICES
 	unsigned int modelLoc = glGetUniformLocation(basicShader.programID, "model");
@@ -226,6 +223,36 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId2);
 
 
+	//LIGHT
+	unsigned int lightVao;
+	unsigned int lightVbo;
+	unsigned int lightEbo;
+	glGenVertexArrays(1, &lightVao);
+	glBindVertexArray(lightVao);
+
+	glGenBuffers(1, &lightVbo);
+	glBindBuffer(GL_ARRAY_BUFFER, lightVbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices3D), vertices3D, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glGenBuffers(1, &lightEbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, lightEbo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW);
+
+
+
+
+
+	//LIGHTING SHADER ATTRIBUTES
+	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
+	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	lightShader.Use();
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
+
+
+
 	Matrix identityMatrix = {};
 
 	//UPDATE
@@ -235,7 +262,6 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		basicShader.Use();
 		glBindVertexArray(mesh.objectID);
 
 

@@ -5,7 +5,7 @@ out vec4 FragColor;
 
 uniform sampler2D ourTexture;
 uniform sampler2D texture2;
-uniform bool useTexture = false;
+uniform bool useTexture = true;
 
 void main()
 {
