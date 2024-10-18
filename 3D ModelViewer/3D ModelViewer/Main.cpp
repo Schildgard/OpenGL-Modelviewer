@@ -40,9 +40,9 @@ int main()
 	Shader basicShader("Shader/basicVertexShader.glsl", "Shader/basicFragmentShader.glsl");
 	Shader lightShader("Shader/LightingVertexShader.glsl", "Shader/LightingFragmentShader.glsl");
 	Shader lightSourceShader("Shader/LightSourceVertexShader.glsl", "Shader/LightSourceFragmentShader.glsl");
-	
-	basicShader.Use();
+
 	glEnable(GL_DEPTH_TEST);
+	basicShader.Use();
 
 
 	float vertices3D[]
@@ -143,41 +143,42 @@ int main()
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
+
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
+
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
+
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
+
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
+
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,
+
 	};
 
 	unsigned int indices[] = { 0,1,2,0,2,3 };
@@ -232,16 +233,16 @@ int main()
 
 	Light lightObject = {};
 	Light::currentInstance = &lightObject;
-	Light::CreateLightSource(lightObject.objectID, vertices3D, indices, sizeof(vertices3D));
+	Light::CreateLightSource(&lightObject.objectID, vertices3D, indices, sizeof(vertices3D));
 
 
 
 	//LIGHTING SHADER ATTRIBUTES
-	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
-	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
-	lightShader.Use();
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
+//	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
+//	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+//	lightShader.Use();
+//	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
+//	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
 
 
 	Matrix identityMatrix = {};
@@ -253,11 +254,11 @@ int main()
 		glClearColor(0.5f, 0.5f, 0.5f, 0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glBindVertexArray(mesh.objectID);
 		basicShader.Use();
 		//SET CAMERA POSITION
 		identityMatrix.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
+		glBindVertexArray(mesh.objectID);
 
 
 		//DRAW OBJECTS
@@ -267,16 +268,19 @@ int main()
 			identityMatrix.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
+		//identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(2.0f, -1.0f, 0.0f));
+		//identityMatrix.Rotate(modelLoc, (float)glfwGetTime()* glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 
 		//DRAW LIGHT SOURCE
-		glBindVertexArray(lightObject.objectID);
 		lightSourceShader.Use();
 		identityMatrix.LookAt(viewLoc2, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc2, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
-
-		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(1.75f, -1.0f, 1.5f));
-		identityMatrix.Rotate(modelLoc2, (float)glfwGetTime()* glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+	
+		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(2.0f, -1.0f, 0.0f));
+		identityMatrix.Rotate(modelLoc2, (float)glfwGetTime()* glm::radians(50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glBindVertexArray(lightObject.objectID);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//CHECK FOR INPUT

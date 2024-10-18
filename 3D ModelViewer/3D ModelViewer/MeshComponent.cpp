@@ -32,7 +32,7 @@ void Mesh::AddMeshComponent()
 	unsigned int colorBuffer;
 	glGenBuffers(1, &colorBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, material.size, material.colorArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, (3*size), material.colorArray, GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
 
