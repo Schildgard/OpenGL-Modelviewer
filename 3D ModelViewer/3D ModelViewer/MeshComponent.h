@@ -8,6 +8,7 @@ class Mesh
 {
 public:
 	unsigned int objectID;
+
 	//VBO
 	float* vertices;
 	unsigned int* indices;

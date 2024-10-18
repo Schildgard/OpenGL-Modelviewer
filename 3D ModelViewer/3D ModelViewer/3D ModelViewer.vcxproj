@@ -136,6 +136,7 @@
     <ClCompile Include="ColorComponent.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Matrix.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ColorComponent.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Material.h" />

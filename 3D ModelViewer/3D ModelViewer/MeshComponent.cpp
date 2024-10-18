@@ -10,13 +10,8 @@ void Mesh::AddMeshComponent()
 {
 	//SET VALUES FOR STANDARD MATERIAL STANDARD MATERIAL
 	material.size = 3 * size;
-	material.colorArray = new float[3 * size];
 	material.textureSize = 2 * size;
 
-	for (int i = 0; i < material.size; i++)
-	{
-		material.colorArray[i] = 1.0f;
-	}
 
 	//CREATE AND BIND OBJECT
 	glGenVertexArrays(1, &objectID);

@@ -14,6 +14,7 @@
 #include "Matrix.h"
 #include "Camera.h"
 #include "Material.h"
+#include "Light.h"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
