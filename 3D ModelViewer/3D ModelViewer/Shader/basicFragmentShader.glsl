@@ -20,6 +20,7 @@ void main()
 {
 	//CALCULATE AMBIENT COLOR
 	vec3 ambient = lightColor * ambientIntesity;
+
 	//CALCULTE DIFFUSE COLOR
 	//1.normalize normal and direction vector
 	vec3 norm = normalize(Normal);

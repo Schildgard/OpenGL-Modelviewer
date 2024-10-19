@@ -304,11 +304,22 @@ int main()
 	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
 	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	glm::vec3 lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
+
 	lightShader.Use();
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
+	//MATERIAL UNIFORMS
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.ambient"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.diffuse"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.specular"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
+	glUniform1f(glGetUniformLocation(lightShader.programID, "material.shininess"), 32.0f);
+	//LIGHT UNIFORMS
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f)));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f)));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f)));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
 
 	basicShader.Use();
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "ourColor"), 1, glm::value_ptr(objectColor));
@@ -361,7 +372,7 @@ int main()
 		//DRAW REFLECTOR OBJECT
 		//SET CAMERA POSITION
 		lightShader.Use();
-		glUniform3fv(glGetUniformLocation(lightShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
+		glUniform3fv(glGetUniformLocation(lightShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
 		glUniform3fv(glGetUniformLocation(lightShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 		identityMatrix.LookAt(viewLoc3, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc3, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);

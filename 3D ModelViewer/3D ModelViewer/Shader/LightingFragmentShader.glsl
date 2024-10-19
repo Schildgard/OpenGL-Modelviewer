@@ -4,7 +4,6 @@ in vec3 Normal;
 //THE SHADER NEEDS TO KNOW THE VERTEX WORLD POSITION TO CALCULATE IT WITH THE LIGHT DIRECTION
 in vec3 FragPosition;
 
-float ambientIntesity = 0.1f;
 
 uniform vec3 objectColor;
 uniform vec3 lightColor;
@@ -14,18 +13,45 @@ uniform vec3 lightPosition;
 uniform vec3 viewPosition;
 
 float specularStrength = 0.5f;
+float ambientIntesity = 0.1f;
+
+
+//MATERIAL
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+}; 
+  
+uniform Material material;
+
+struct Light {
+    vec3 position;
+  
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
+
+uniform Light light; 
+
+
+
+
 
 void main()
 {
+
 	//AFFECT LIGHTCOLOR BY AMBIENT INTESITY
-	vec3 ambient = ambientIntesity * lightColor;
+	vec3 ambient =  light.ambient * material.ambient;
 
 	//NORMALIZE NORMAL AND DIRECTION VECTOR
 	vec3 norm = normalize(Normal);
-	vec3 lightDirection = normalize(lightPosition - FragPosition);
+	vec3 lightDirection = normalize(light.position - FragPosition);
 	//CALCULATE IMPACT OF LIGHT ON THE FRAGMENT. MAX CLAMPS THE VALUE TO A MINIMUM OF 0.0, SO THE IMPACT DOES NOT GET NEGATIVE
 	float impact = max(dot(norm,lightDirection), 0.0f);
-	vec3 diffuse = impact * lightColor;
+	vec3 diffuse = light.diffuse * (impact * material.diffuse);
 
 	//SPECULAR
 	//1. get normalized view direction
@@ -33,8 +59,8 @@ void main()
 	//2.get reflection between light and normal vector
 	vec3 reflectDirection = reflect(-lightDirection, norm);
 	//3. calculate specular. 32 is the value for shininess. the higher the value the more concentrated the specular gets
-	float specValue = pow(max(dot(viewDirection,reflectDirection),0.0f), 32);
-	vec3 specular = specularStrength * specValue * lightColor;
+	float specValue = pow(max(dot(viewDirection,reflectDirection),0.0f), material.shininess);
+	vec3 specular = light.specular * (specValue *material.specular);
 
 
 
