@@ -308,11 +308,13 @@ int main()
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
+
 	basicShader.Use();
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "ourColor"), 1, glm::value_ptr(objectColor));
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
-
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 
 
 	Matrix identityMatrix = {};
@@ -331,6 +333,7 @@ int main()
 		//DRAW OBJECTS
 		basicShader.Use();
 		glUniform3fv(glGetUniformLocation(basicShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
+		glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 		//SET CAMERA POSITION
 		identityMatrix.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
@@ -338,7 +341,7 @@ int main()
 		for (int i = 0; i < sizeOfObjectArray; i++)
 		{
 			identityMatrix.values = glm::translate(identityMatrix.values, objectPositions[i]);
-			identityMatrix.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(00.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+			identityMatrix.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
@@ -359,6 +362,7 @@ int main()
 		//SET CAMERA POSITION
 		lightShader.Use();
 		glUniform3fv(glGetUniformLocation(lightShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
+		glUniform3fv(glGetUniformLocation(lightShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 		identityMatrix.LookAt(viewLoc3, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc3, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 

@@ -9,10 +9,12 @@ out vec4 FragColor;
 uniform sampler2D ourTexture;
 uniform sampler2D texture2;
 uniform vec3 lightPosition;
+uniform vec3 viewPosition;
 uniform bool useTexture = true;
 
 uniform vec3 lightColor;
 float ambientIntesity = 0.1f;
+float specularStrength = 0.5f;
 
 void main()
 {
@@ -25,9 +27,20 @@ void main()
 	//2.calculate diffuse impact on color
 	float impact = max(dot(norm, lightDirection),0.0f);
 	vec3 diffuse = impact * lightColor;
-	//3
 
-	vec3 result = (ambient+diffuse)*lightColor;
+
+	//SPECULAR
+	//1.get normalized view Direction
+	vec3 viewDirection = normalize(viewPosition - FragPosition);
+	//2.get reflection Direction
+	vec3 reflectDir = reflect(-lightDirection,norm);
+	//3.calculate Specular
+	float specularValue = pow(max(dot(viewDirection,reflectDir),0.0f), 32);
+	vec3 specular = specularStrength * specularValue * lightColor;
+
+
+
+	vec3 result = (ambient+diffuse+specular)*lightColor;
 
 	if(useTexture)
 	{
