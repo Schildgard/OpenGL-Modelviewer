@@ -25,8 +25,12 @@ void Mesh::AddMeshComponent()
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, size, (vertices), GL_STATIC_DRAW);
 	//POSITION ATTRIB
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
+	//NORMAL POSITION ATTRIB
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
+	glEnableVertexAttribArray(3);
 
 	//COLOR ATTRIB
 	unsigned int colorBuffer;
@@ -61,8 +65,12 @@ void Mesh::AddMeshComponent(float* _vertices, unsigned int* _indices, unsigned i
 
 
 	//POSITION ATTRIB
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
+
+	//NORMAL POSITION ATTRIB
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(3);
 
 
 	//COLOR ATTRIB
@@ -118,8 +126,8 @@ void Mesh::BindTextureWithAlpha(unsigned char* _data)
 	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer2);
 	glBufferData(GL_ARRAY_BUFFER, material.textureSize, material.textureCoods, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(2);
 
 
 	glGenTextures(1, &material.textureId2);

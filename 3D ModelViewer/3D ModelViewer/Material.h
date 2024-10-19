@@ -9,7 +9,7 @@ class Material
 {
 public:
 	//COLOR
-	unsigned int size = 3*36; //SIZE IS 3*VERTEX COUNT
+	unsigned int size = 6*36; //SIZE IS 6*VERTEX COUNT
 	float colorArray [3*36] =
 	{
 		1.0f, 1.0f, 1.0f,

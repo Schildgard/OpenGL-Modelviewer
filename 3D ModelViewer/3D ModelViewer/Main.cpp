@@ -45,6 +45,51 @@ int main()
 	basicShader.Use();
 
 
+	float vertices[] = {
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+	};
+
+
 	float vertices3D[]
 	{
 	-0.5f, -0.5f, -0.5f,
@@ -202,9 +247,9 @@ int main()
 
 	// ADD MESH 
 	Mesh mesh = {};
-	mesh.vertices = vertices3D;
+	mesh.vertices = vertices;
 	mesh.indices = indices;
-	mesh.size = sizeof(vertices3D);
+	mesh.size = sizeof(vertices);
 	mesh.AddMeshComponent();
 
 	mesh.BindTexture(crate);
@@ -240,36 +285,41 @@ int main()
 	Light lightObject = {};
 	Light::currentInstance = &lightObject;
 	//Light::CreateLightSource(&lightObject.objectID, vertices3D, indices, sizeof(vertices3D));
-	lightObject.vertices = vertices3D;
+	lightObject.vertices = vertices;
 	lightObject.indices = indices;
-	lightObject.size = sizeof(vertices3D);
+	lightObject.size = sizeof(vertices);
 	Light::CreateLightSource();
 
 
 
 	Mesh reflector = {};
-	reflector.vertices = vertices3D;
+	reflector.vertices = vertices;
 	reflector.indices = indices;
-	reflector.size = sizeof(vertices3D);
+	reflector.size = sizeof(vertices);
 	reflector.AddMeshComponent();
 
 
 
 	//LIGHTING SHADER ATTRIBUTES
-	glm::vec3 objectColor = glm::vec3(0.0f, 0.5f, 0.31f);
+	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
 	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	glm::vec3 lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 	lightShader.Use();
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
-
-
-	//BASIC SHADER LIGHTING ATTRIBUTES
-	glm::vec3 lightColor2 = glm::vec3(1.0f, 0.0f, 1.0f);
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
 	basicShader.Use();
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "lightColor"), 1, glm::value_ptr(lightColor2));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "ourColor"), 1, glm::value_ptr(objectColor));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "lightColor"), 1, glm::value_ptr(lightColor));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
+
+
 
 	Matrix identityMatrix = {};
 
+
+	glm::vec3 moving(0.001f, 0.0f, 0.0f);
+	float direction = 0.001f;
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
 	{
@@ -298,8 +348,9 @@ int main()
 		identityMatrix.LookAt(viewLoc2, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc2, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
-		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(2.0f, -1.0f, 0.0f));
-		identityMatrix.Rotate(modelLoc2, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		identityMatrix.values = glm::translate(identityMatrix.values, lightPosition);
+		identityMatrix.values = glm::scale(identityMatrix.values,glm::vec3(0.2f));
+		identityMatrix.Rotate(modelLoc2, glm::radians(00.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glBindVertexArray(lightObject.objectID);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -309,8 +360,8 @@ int main()
 		identityMatrix.LookAt(viewLoc3, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc3, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
-		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(-2.0f, 1.0f, 0.0f));
-		identityMatrix.Rotate(modelLoc3, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(-3.0f, 1.0f, 1.0f));
+		identityMatrix.Rotate(modelLoc3, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glBindVertexArray(reflector.objectID);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -321,6 +372,12 @@ int main()
 
 		//DRAW ACTUAL SCREEN
 		glfwSwapBuffers(glfWindow);
+		//lightPosition = glm::vec3(1.2f + moving.x, 0.0f, 0.0f);
+		moving.x += direction;
+		if (moving.x > 2.5f || moving.x < -2.5f)
+		{
+			direction *= -1;
+		}
 
 		//COUNT FRAME TIME
 		currentFrame = glfwGetTime();
