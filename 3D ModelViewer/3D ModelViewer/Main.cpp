@@ -330,6 +330,7 @@ int main()
 
 		//DRAW OBJECTS
 		basicShader.Use();
+		glUniform3fv(glGetUniformLocation(basicShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
 		//SET CAMERA POSITION
 		identityMatrix.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
@@ -337,7 +338,7 @@ int main()
 		for (int i = 0; i < sizeOfObjectArray; i++)
 		{
 			identityMatrix.values = glm::translate(identityMatrix.values, objectPositions[i]);
-			identityMatrix.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+			identityMatrix.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(00.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
@@ -357,6 +358,7 @@ int main()
 		//DRAW REFLECTOR OBJECT
 		//SET CAMERA POSITION
 		lightShader.Use();
+		glUniform3fv(glGetUniformLocation(lightShader.programID, "lightPosition"), 1, glm::value_ptr(lightPosition));
 		identityMatrix.LookAt(viewLoc3, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc3, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
@@ -372,9 +374,10 @@ int main()
 
 		//DRAW ACTUAL SCREEN
 		glfwSwapBuffers(glfWindow);
-		//lightPosition = glm::vec3(1.2f + moving.x, 0.0f, 0.0f);
+		lightPosition = glm::vec3(1.2f + moving.x, 0.0f, 0.0f);
+		
 		moving.x += direction;
-		if (moving.x > 2.5f || moving.x < -2.5f)
+		if (moving.x > 5.0f || moving.x < -5.0f)
 		{
 			direction *= -1;
 		}
