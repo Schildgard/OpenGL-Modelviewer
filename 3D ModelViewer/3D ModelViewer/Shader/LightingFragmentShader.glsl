@@ -1,22 +1,11 @@
 #version 330 core
 out vec4 FragColor;
 in vec3 Normal;
-//THE SHADER NEEDS TO KNOW THE VERTEX WORLD POSITION TO CALCULATE IT WITH THE LIGHT DIRECTION
 in vec3 FragPosition;
 
-
 uniform vec3 objectColor;
-uniform vec3 lightColor;
-//POSITION WHERE THE LIGHT SOURCE COMES FROM
-uniform vec3 lightPosition;
-//POSITION OF THE CAMERA
 uniform vec3 viewPosition;
 
-float specularStrength = 0.5f;
-float ambientIntesity = 0.1f;
-
-
-//MATERIAL
 struct Material {
     vec3 ambient;
     vec3 diffuse;
@@ -27,6 +16,7 @@ struct Material {
 uniform Material material;
 
 struct Light {
+	//POSITION WHERE THE LIGHT SOURCE COMES FROM
     vec3 position;
   
     vec3 ambient;

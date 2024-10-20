@@ -77,7 +77,7 @@ void Mesh::AddMeshComponent(float* _vertices, unsigned int* _indices, unsigned i
 	unsigned int colorBuffer;
 	glGenBuffers(1, &colorBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, material.size, material.colorArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 3*size, material.colorArray, GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
 
@@ -96,7 +96,7 @@ void Mesh::BindTexture(unsigned char* _data)
 	unsigned int textureBuffer1;
 	glGenBuffers(1, &textureBuffer1);
 	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer1);
-	glBufferData(GL_ARRAY_BUFFER, material.textureSize, material.textureCoods, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 3.*size, material.textureCoods, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
@@ -124,7 +124,7 @@ void Mesh::BindTextureWithAlpha(unsigned char* _data)
 	unsigned int textureBuffer2;
 	glGenBuffers(1, &textureBuffer2);
 	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer2);
-	glBufferData(GL_ARRAY_BUFFER, material.textureSize, material.textureCoods, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 3*size, material.textureCoods, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
