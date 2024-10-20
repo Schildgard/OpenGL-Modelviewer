@@ -8,8 +8,12 @@
 class Texture
 {
 public:
-	static int width;
-	static int height ;
-	static int nrChannels;
-	static unsigned char* LoadTexture(const char* _filepath);
+	int width;
+	int height ;
+	int nrChannels;
+
+	unsigned char* image;
+
+	static unsigned char* LoadTexture(Texture& _texture, const char* _filepath);
+	void LoadTexture(const char* _filepath);
 };

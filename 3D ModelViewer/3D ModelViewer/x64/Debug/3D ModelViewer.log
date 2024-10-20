@@ -1,3 +1,2 @@
 ﻿  MeshComponent.cpp
-D:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\MeshComponent.cpp(99,34): warning C4244: "Argument": Konvertierung von "double" in "GLsizeiptr", möglicher Datenverlust
   3D ModelViewer.vcxproj -> D:\Repository\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

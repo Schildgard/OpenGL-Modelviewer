@@ -89,14 +89,14 @@ void Mesh::AddMeshComponent(float* _vertices, unsigned int* _indices, unsigned i
 }
 
 
-void Mesh::BindTexture(unsigned char* _data)
+void Mesh::BindTexture(Texture _texture)
 {
-
+	material.texture = _texture;
 	//TEXTURE ATTRIB
 	unsigned int textureBuffer1;
 	glGenBuffers(1, &textureBuffer1);
 	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer1);
-	glBufferData(GL_ARRAY_BUFFER, 3.*size, material.textureCoods, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 2*size, material.textureCoods, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
@@ -111,20 +111,21 @@ void Mesh::BindTexture(unsigned char* _data)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture::width, Texture::height, 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, material.texture.width, material.texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, material.texture.image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	stbi_image_free(_data);
+	stbi_image_free(material.texture.image);
 
 }
 
-void Mesh::BindTextureWithAlpha(unsigned char* _data)
+void Mesh::BindTextureWithAlpha(Texture _texture)
 {
+	material.texture = _texture;
 	//TEXTURE ATTRIB
 	unsigned int textureBuffer2;
 	glGenBuffers(1, &textureBuffer2);
 	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer2);
-	glBufferData(GL_ARRAY_BUFFER, 3*size, material.textureCoods, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 2*size, material.textureCoods, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
@@ -138,9 +139,9 @@ void Mesh::BindTextureWithAlpha(unsigned char* _data)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Texture::width, Texture::height, 0, GL_RGBA, GL_UNSIGNED_BYTE, _data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, material.texture.width, material.texture.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, material.texture.image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
-	stbi_image_free(_data);
+	stbi_image_free(material.texture.image);
 
 }

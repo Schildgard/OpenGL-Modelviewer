@@ -238,10 +238,17 @@ int main()
 	};
 	int sizeOfObjectArray = std::size(objectPositions);
 
+	Texture crateTexture = {};
+	Texture catTexture = {};
+	Texture woodContainerTexture = {};
 	//IMAGE 1
-	unsigned char* crate = Texture::LoadTexture("Images/container.jpg");
+	//unsigned char* crate = Texture::LoadTexture(crateTexture,"Images/container.jpg");
+	crateTexture.LoadTexture("Images/container.jpg");
 	//IMAGE 2
-	unsigned char* cat = Texture::LoadTexture("Images/Garumak512.png");
+	//unsigned char* cat = Texture::LoadTexture(catTexture,"Images/Garumak512.png");
+	catTexture.LoadTexture("Images/Garumak512.png");
+	//IMGAGE 3
+	unsigned char* woodenContainer = Texture::LoadTexture(woodContainerTexture,"Images/container2.png");
 
 
 
@@ -252,8 +259,8 @@ int main()
 	mesh.size = sizeof(vertices);
 	mesh.AddMeshComponent();
 
-	mesh.BindTexture(crate);
-	mesh.BindTextureWithAlpha(cat);
+	mesh.BindTexture(crateTexture); //TODO: STORE IMAGE INSIDE TEXTURE OBJECT
+	mesh.BindTextureWithAlpha(catTexture);
 
 	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
 	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
@@ -305,18 +312,43 @@ int main()
 	glm::vec3 objectColor2 = glm::vec3(1.0f);
 	glm::vec3 lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 
+
+	//MATERIAL TEST
+	Material colorBoxMaterial;
+	colorBoxMaterial.ambient = glm::vec3(1.0f, 0.5f, 0.31f);
+	colorBoxMaterial.diffuse = glm::vec3(1.0f, 0.5f, 0.31f);
+	colorBoxMaterial.specular = glm::vec3(0.5f, 0.5f, 0.5f);
+	colorBoxMaterial.shininess = 32.0f;
+
+	colorBoxMaterial.lightAmbient = glm::vec3(0.2f);
+	colorBoxMaterial.lightDiffuse = glm::vec3(0.5f);
+	colorBoxMaterial.lightSpecular = glm::vec3(1.0f);
+
+	Material texturedBoxMaterial;
+	texturedBoxMaterial.ambient = glm::vec3(1.0f);
+	texturedBoxMaterial.diffuse = glm::vec3(1.0f);
+	texturedBoxMaterial.specular = glm::vec3(0.5f);
+	texturedBoxMaterial.shininess = 32.0f;
+
+	texturedBoxMaterial.lightAmbient = glm::vec3(0.2f);
+	texturedBoxMaterial.lightDiffuse = glm::vec3(0.5f);
+	texturedBoxMaterial.lightSpecular = glm::vec3(1.0f);
+
+	Material standard;
+
 	lightShader.Use();
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor));
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 	//MATERIAL UNIFORMS
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.ambient"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.diffuse"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.specular"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
-	glUniform1f(glGetUniformLocation(lightShader.programID, "material.shininess"), 32.0f);
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.ambient"), 1, glm::value_ptr(standard.ambient));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.diffuse"), 1, glm::value_ptr(standard.diffuse));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "material.specular"), 1, glm::value_ptr(standard.specular));
+	glUniform1f(glGetUniformLocation(lightShader.programID, "material.shininess"), standard.shininess);
 	//LIGHT UNIFORMS
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f)));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f)));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f)));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.ambient"), 1, glm::value_ptr(standard.lightAmbient));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.diffuse"), 1, glm::value_ptr(standard.lightDiffuse));
+	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.specular"), 1, glm::value_ptr(standard.lightSpecular));
+
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
 
 
@@ -325,14 +357,14 @@ int main()
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 
 	//MATERIAL UNIFORMS
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.ambient"), 1, glm::value_ptr(glm::vec3(1.0)));
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.diffuse"), 1, glm::value_ptr(glm::vec3(1.0f)));
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.specular"), 1, glm::value_ptr(glm::vec3(0.5f, 0.5f, 0.5f)));
-	glUniform1f(glGetUniformLocation(basicShader.programID, "material.shininess"), 32.0f);
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.ambient"), 1, glm::value_ptr(texturedBoxMaterial.ambient));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.diffuse"), 1, glm::value_ptr(texturedBoxMaterial.diffuse));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.specular"), 1, glm::value_ptr(texturedBoxMaterial.specular));
+	glUniform1f(glGetUniformLocation(basicShader.programID, "material.shininess"), texturedBoxMaterial.shininess);
 	//LIGHT UNIFORMS
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.ambient"), 1, glm::value_ptr(glm::vec3(0.2f)));
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.diffuse"), 1, glm::value_ptr(glm::vec3(0.5f)));
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.specular"), 1, glm::value_ptr(glm::vec3(1.0f)));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.ambient"), 1, glm::value_ptr(texturedBoxMaterial.lightAmbient));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.diffuse"), 1, glm::value_ptr(texturedBoxMaterial.lightDiffuse));
+	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.specular"), 1, glm::value_ptr(texturedBoxMaterial.lightSpecular));
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
 
 
@@ -414,7 +446,7 @@ int main()
 		}
 
 		//COUNT FRAME TIME
-		currentFrame = glfwGetTime();
+		currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 	}

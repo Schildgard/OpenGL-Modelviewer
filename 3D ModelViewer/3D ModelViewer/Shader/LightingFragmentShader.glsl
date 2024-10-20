@@ -2,11 +2,14 @@
 out vec4 FragColor;
 in vec3 Normal;
 in vec3 FragPosition;
+in vec2 TexCoods;
 
 uniform vec3 objectColor;
 uniform vec3 viewPosition;
 
 struct Material {
+
+	//sampler2D diffuse;
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -35,6 +38,7 @@ void main()
 
 	//AFFECT LIGHTCOLOR BY AMBIENT INTESITY
 	vec3 ambient =  light.ambient * material.ambient;
+	//vec3 ambient = light.ambient *vec3(texture(material.diffuse, TexCoods));
 
 	//NORMALIZE NORMAL AND DIRECTION VECTOR
 	vec3 norm = normalize(Normal);
@@ -42,6 +46,7 @@ void main()
 	//CALCULATE IMPACT OF LIGHT ON THE FRAGMENT. MAX CLAMPS THE VALUE TO A MINIMUM OF 0.0, SO THE IMPACT DOES NOT GET NEGATIVE
 	float impact = max(dot(norm,lightDirection), 0.0f);
 	vec3 diffuse = light.diffuse * (impact * material.diffuse);
+	//vec3 diffuse = light.diffuse *(impact * vec3(texture(material.diffuse,TexCoods)));
 
 	//SPECULAR
 	//1. get normalized view direction

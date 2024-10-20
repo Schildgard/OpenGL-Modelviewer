@@ -9,7 +9,6 @@ class Mesh
 public:
 	unsigned int objectID;
 
-	//VBO
 	float* vertices;
 	unsigned int* indices;
 	unsigned int size;
@@ -20,6 +19,6 @@ public:
 	void AddMeshComponent();
 	void AddMeshComponent(float* _vertices, unsigned int* _indices, unsigned int _size);
 	//TEXTURE FUNCTIONS
-	void BindTexture(unsigned char* _data);
-	void BindTextureWithAlpha(unsigned char* _data);
+	void BindTexture(Texture _texture);
+	void BindTextureWithAlpha(Texture _texture);
 };
