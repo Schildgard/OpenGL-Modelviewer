@@ -101,8 +101,9 @@ public:
 			0.0f, 1.0f
 	};
 	//Texture* texture;
-	unsigned int textureId1;
-	unsigned int textureId2;
+	unsigned int textureId1 = 0;
+	unsigned int textureId2 = 0;
+	unsigned int textureId3 = 0;
 
 	Texture texture;
 

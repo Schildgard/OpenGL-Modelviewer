@@ -1,2 +1,5 @@
-﻿  MeshComponent.cpp
-  3D ModelViewer.vcxproj -> D:\Repository\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe
+﻿  Main.cpp
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
+  (compiling source file 'Main.cpp')
+  
+  3D ModelViewer.vcxproj -> D:\Programming\Leonard\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

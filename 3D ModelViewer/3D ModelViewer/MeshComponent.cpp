@@ -130,10 +130,16 @@ void Mesh::BindTextureWithAlpha(Texture _texture)
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
 
-
+	if(material.textureId2 == 0)
+	{
 	glGenTextures(1, &material.textureId2);
 	glBindTexture(GL_TEXTURE_2D, material.textureId2);
-
+	}
+	else
+	{
+		glGenTextures(1, &material.textureId3);
+		glBindTexture(GL_TEXTURE_2D, material.textureId3);
+	}
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);

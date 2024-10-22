@@ -17,10 +17,10 @@ uniform mat4 projection;
 void main()
 {
 	gl_Position = projection * view * model *vec4(aPos, 1.0f);
+	FragPosition = vec3(model*vec4(aPos, 1.0f));
 
 	ourColor = aColor;
 	texCood = aTexCoord;
-	FragPosition = vec3(model*vec4(aPos, 1.0f));
 
 	//THIS USES NORMAL ONLY IN LOCAL SPACE, HOWEVER FRAGMENT SHADER CALCULATIONS ARE DONE IN WORLD SPACE
 	//Normal = aNormal;

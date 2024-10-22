@@ -8,6 +8,7 @@ out vec4 FragColor;
 
 uniform sampler2D ourTexture;
 uniform sampler2D texture2;
+
 uniform vec3 lightPosition;
 uniform vec3 viewPosition;
 uniform bool useTexture = true;
