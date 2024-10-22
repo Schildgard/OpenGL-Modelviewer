@@ -374,6 +374,7 @@ int main()
 
 
 
+
 	lightShader.Use();
 	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
 	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor2));
