@@ -6,27 +6,22 @@ in vec3 Normal;
 
 out vec4 FragColor;
 
-uniform sampler2D ourTexture;
-uniform sampler2D texture2;
-
 uniform vec3 lightPosition;
 uniform vec3 viewPosition;
 uniform bool useTexture = true;
 
 uniform vec3 lightColor;
-float ambientIntesity = 0.1f;
-float specularStrength = 0.5f;
 
 
 
 struct Material
 {
-vec3 ambient;
-vec3 diffuse;
-vec3 specular;
+sampler2D diffuse;
+sampler2D specular;
 float shininess;
 };
 uniform Material material;
+uniform Material material2;
 
 struct Light
 {
@@ -46,8 +41,7 @@ uniform Light light;
 void main()
 {
 	//CALCULATE AMBIENT COLOR
-	//vec3 ambient = lightColor * ambientIntesity;
-	vec3 ambient = light.ambient * material.ambient;
+	vec3 ambient = light.ambient * (vec3(texture(material.diffuse, texCood)) * vec3(texture(material2.diffuse,texCood))) ;
 
 	//CALCULTE DIFFUSE COLOR
 	//1.normalize normal and direction vector
@@ -55,7 +49,7 @@ void main()
 	vec3 lightDirection = normalize(light.position - FragPosition);
 	//2.calculate diffuse impact on color
 	float impact = max(dot(norm, lightDirection),0.0f);
-	vec3 diffuse = light.diffuse * (impact * material.diffuse);
+	vec3 diffuse = light.diffuse * (vec3(impact * texture(material.diffuse,texCood))* vec3(texture(material2.diffuse,texCood)));
 
 
 	//SPECULAR
@@ -65,15 +59,15 @@ void main()
 	vec3 reflectDir = reflect(-lightDirection,norm);
 	//3.calculate Specular
 	float specularValue = pow(max(dot(viewDirection,reflectDir),0.0f), material.shininess);
-	vec3 specular = light.specular * (specularValue * material.specular);
+	vec3 specular = light.specular * vec3(specularValue * (texture(material.specular, texCood)) * texture(material2.specular, texCood));
 
 
 
-	vec3 result = (ambient+diffuse+specular)*ourColor;
+	vec3 result = (ambient+diffuse+specular);
 
 	if(useTexture)
 	{
-	FragColor = texture(ourTexture,texCood) * ((texture(texture2,texCood) * vec4(result,1.0f)));
+	FragColor = vec4(result,1.0f);
 	}
 	else
 	{

@@ -306,7 +306,6 @@ int main()
 	reflector.BindTextureWithAlpha(woodContainerTexture);
 	reflector.BindTextureWithAlpha(containerSpecular);
 
-	lightShader.Use();
 
 	//LIGHTING SHADER ATTRIBUTES
 	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
@@ -343,7 +342,7 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId2);
-	lightShader.Use();
+	//lightShader.Use();
 	glActiveTexture(GL_TEXTURE2),
 	glBindTexture(GL_TEXTURE_2D, reflector.material.textureId2);
 	glActiveTexture(GL_TEXTURE3);
@@ -354,16 +353,15 @@ int main()
 
 
 	basicShader.Use();
-	glUniform1i(glGetUniformLocation(basicShader.programID, "ourTexture"), 0);
-	glUniform1i(glGetUniformLocation(basicShader.programID, "texture2"), 1);
 
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "ourColor"), 1, glm::value_ptr(objectColor2));
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 
 	//MATERIAL UNIFORMS
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.ambient"), 1, glm::value_ptr(texturedBoxMaterial.ambient));
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.diffuse"), 1, glm::value_ptr(texturedBoxMaterial.diffuse));
-	glUniform3fv(glGetUniformLocation(basicShader.programID, "material.specular"), 1, glm::value_ptr(texturedBoxMaterial.specular));
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material.diffuse"), 2);
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material2.diffuse"), 1);
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material.specular"),3);
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material2.specular"), 3);
 	glUniform1f(glGetUniformLocation(basicShader.programID, "material.shininess"), texturedBoxMaterial.shininess);
 	//LIGHT UNIFORMS
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.ambient"), 1, glm::value_ptr(texturedBoxMaterial.lightAmbient));
@@ -375,32 +373,13 @@ int main()
 
 
 
-	lightShader.Use();
-	//SET TEXTURE ATTRIBUTE LOCATION IN SHADER
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "objectColor"), 1, glm::value_ptr(objectColor2));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
-	//MATERIAL UNIFORMS
-	glUniform1i(glGetUniformLocation(lightShader.programID, "material.diffuse"), 2);
-	glUniform1i(glGetUniformLocation(lightShader.programID, "material.specSampler"), 3);
-	//glUniform3fv(glGetUniformLocation(lightShader.programID,"material.specular"), 1, glm::value_ptr(colorBoxMaterial.specular));
-	glUniform1f(glGetUniformLocation(lightShader.programID, "material.shininess"), texturedBoxMaterial.shininess*2);
-	//LIGHT UNIFORMS
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.ambient"), 1, glm::value_ptr(texturedBoxMaterial.lightAmbient));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.diffuse"), 1, glm::value_ptr(texturedBoxMaterial.lightDiffuse));
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.specular"), 1, glm::value_ptr(texturedBoxMaterial.lightSpecular));
-
-	glUniform3fv(glGetUniformLocation(lightShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
-
-
-
-
 
 
 	Matrix identityMatrix = {};
 
 
 	glm::vec3 moving(0.001f, 0.0f, 0.0f);
-	float direction = 0.07f;
+	float direction = 2.5f;
 
 	//UPDATE
 	while (!glfwWindowShouldClose(glfWindow))
@@ -442,17 +421,17 @@ int main()
 
 		//DRAW REFLECTOR OBJECT
 		//SET CAMERA POSITION
-		lightShader.Use();
 
+		basicShader.Use();
 
-		glUniform3fv(glGetUniformLocation(lightShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
-		glUniform3fv(glGetUniformLocation(lightShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
+		glUniform3fv(glGetUniformLocation(basicShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
+		glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 
-		identityMatrix.LookAt(viewLoc3, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
-		identityMatrix.Zoom(projectionLoc3, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
+		identityMatrix.LookAt(viewLoc2, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
+		identityMatrix.Zoom(projectionLoc2, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
 		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(-3.0f, 1.0f, 1.0f));
-		identityMatrix.Rotate(modelLoc3, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		identityMatrix.Rotate(modelLoc2, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glBindVertexArray(reflector.objectID);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
@@ -463,9 +442,9 @@ int main()
 
 		//DRAW ACTUAL SCREEN
 		glfwSwapBuffers(glfWindow);
-		lightPosition = glm::vec3(1.2f + moving.x, 0.0f, 0.0f);
+		//lightPosition = glm::vec3(1.2f + moving.x, 0.0f, 0.0f);
 
-		moving.x += direction;
+		moving.x += direction *deltaTime;
 		if (moving.x > 5.0f || moving.x < -5.0f)
 		{
 			direction *= -1;
