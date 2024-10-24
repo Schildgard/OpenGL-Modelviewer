@@ -262,6 +262,7 @@ int main()
 
 	mesh.BindTexture(crateTexture); //TODO: STORE IMAGE INSIDE TEXTURE OBJECT
 	mesh.BindTextureWithAlpha(catTexture, false);
+	mesh.AssignShaderProgram(&basicShader);
 
 
 	Mesh reflector = {};
@@ -272,6 +273,7 @@ int main()
 	reflector.BindTextureWithAlpha(woodContainerTexture);
 	reflector.BindTextureWithAlpha(catTexture);
 	reflector.BindTextureWithAlpha(containerSpecular);
+	reflector.AssignShaderProgram(&basicShader);
 
 
 	Light lightObject = {};
@@ -352,18 +354,9 @@ int main()
 
 
 		//DRAW OBJECTS
-		basicShader.Use();
-		glUniform3fv(glGetUniformLocation(basicShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
-		glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
-
-
-		reflector.DrawThisObject();
-		//SET CAMERA POSITION
-		identityMatrix.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
-		identityMatrix.Zoom(projectionLoc, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
-		glBindVertexArray(mesh.objectID);
 		for (int i = 0; i < sizeOfObjectArray; i++)
 		{
+			mesh.DrawThisObject(lightPosition, SceneCamera);
 			identityMatrix.values = glm::translate(identityMatrix.values, objectPositions[i]);
 			identityMatrix.Rotate(modelLoc, (float)glfwGetTime() * glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));
 			glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -384,18 +377,19 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		//DRAW REFLECTOR OBJECT
-		//SET CAMERA POSITION
 
 		basicShader.Use();
-
+		//SET CAMERA POSITION
+		reflector.DrawThisObject(lightPosition, SceneCamera);
 		glUniform3fv(glGetUniformLocation(basicShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
 		glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
+		identityMatrix.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
+		identityMatrix.Zoom(projectionLoc, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
 
-		identityMatrix.LookAt(viewLoc2, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
-		identityMatrix.Zoom(projectionLoc2, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
+
 
 		identityMatrix.values = glm::translate(identityMatrix.values, glm::vec3(-3.0f, 1.0f, 1.0f));
-		identityMatrix.Rotate(modelLoc2, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		identityMatrix.Rotate(modelLoc, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glBindVertexArray(reflector.objectID);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 

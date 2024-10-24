@@ -2,4 +2,10 @@
 D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
   (compiling source file 'Main.cpp')
   
+  MeshComponent.cpp
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
+  (compiling source file 'MeshComponent.cpp')
+  
+  Generating Code...
+D:\Programming\Leonard\3DModelView\3D ModelViewer\3D ModelViewer\MeshComponent.cpp(283,1): warning C4715: 'Mesh::FindNextTextureSlot': not all control paths return a value
   3D ModelViewer.vcxproj -> D:\Programming\Leonard\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

@@ -219,9 +219,22 @@ void Mesh::BindTextureWithAlpha(Texture _texture, bool _freeImage)
 
 
 
-void Mesh::DrawThisObject()
+void Mesh::DrawThisObject(glm::vec3 _lightPosition, Camera _SceneCamera)
 {
 
+	unsigned int currentProgram;
+	//ACTIVATE SHADER
+	material.assignedShader->Use();
+	glGetIntegerv(GL_CURRENT_PROGRAM, (GLint*)&currentProgram);
+	if (currentProgram == material.assignedShader->programID) {
+		std::cout << "Das korrekte Shader-Programm ist aktiv." << std::endl;
+	}
+	else {
+		std::cout << "Ein anderes Shader-Programm ist aktiv." << std::endl;
+	}
+
+
+	//ASSIGN TEXTURES OF MATERIAL TO OPENGL
 	for (int i = 0; i < 16; i++) //hardcoded value of 15 represents the maximum count of texture IDs in the material
 	{
 		if (material.textureIds[i] != 0)
@@ -231,6 +244,26 @@ void Mesh::DrawThisObject()
 		}
 		else return; //MAYBE REMOVE THIS LATER
 	}
+	// SET LIGHT AND SCENE CAMERA POSITION
+	glUniform3fv(glGetUniformLocation(material.assignedShader->programID, "light.position"), 1, glm::value_ptr(_lightPosition));
+	glUniform3fv(glGetUniformLocation(material.assignedShader->programID, "viewPosition"), 1, glm::value_ptr(_SceneCamera.position));
+
+	//SET THE SHADER UNIFORMS TO THE PROPERTIES OF THE OBJECT
+	modelLocation = glGetUniformLocation(material.assignedShader->programID, "model");
+	viewLocation = glGetUniformLocation(material.assignedShader->programID, "view");
+	projectionLocation = glGetUniformLocation(material.assignedShader->programID, "projection");
+
+	Matrix identityMatrix = {};
+	identityMatrix.LookAt(viewLocation, _SceneCamera.position, _SceneCamera.forward, _SceneCamera.upward);
+	identityMatrix.Zoom(projectionLocation, glm::radians(_SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);
+
+
+	glBindVertexArray(objectID);
+}
+
+void Mesh::AssignShaderProgram(Shader* _ShaderProgram)
+{
+	material.assignedShader = _ShaderProgram;
 }
 
 unsigned int Mesh::FindNextTextureSlot()

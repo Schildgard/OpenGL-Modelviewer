@@ -8,12 +8,13 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "TextureComponent.h"
+#include "BasicShader.h"
 
 class Material
 {
 public:
-
-
+	
+	Shader* assignedShader;
 
 	//COLOR
 	unsigned int size = 6*36; //SIZE IS 6*VERTEX COUNT
@@ -57,21 +58,19 @@ public:
 		1.0f, 1.0f, 1.0f,
 	};
 
+	//TEXTURE
+	Texture texture;
 	unsigned int textureIds[16];
 
-	Texture texture;
-
+	//STANDARD MATERIAL PROPERTIES
 	glm::vec3 ambient = glm::vec3(1.0f);
 	glm::vec3 diffuse = ambient;
 	glm::vec3 specular =glm::vec3(0.5f);
 	float shininess = 32.0f;
-
 	//LIGHT PROPERTIES DEFINE HOW MUCH THE MATERIAL PROPERTIES ARE AFFECTED 
 	glm::vec3 lightAmbient = glm::vec3(0.2f);
 	glm::vec3 lightDiffuse = lightAmbient;
 	glm::vec3 lightSpecular = glm::vec3(1.0f);
-
-	//TODO: SET A REFERNCE TO THE SHADER WHICH THE MATERIAL IS SUPPOSED TO USE
 
 	Material()
 	{

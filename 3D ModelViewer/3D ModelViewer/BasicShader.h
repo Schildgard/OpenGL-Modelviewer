@@ -111,6 +111,7 @@ public:
 	void Use()
 	{
 		glUseProgram(programID);
+
 	}
 
 	void SetBool(const std::string &_name, bool _value) const
