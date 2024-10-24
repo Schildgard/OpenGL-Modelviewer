@@ -29,14 +29,14 @@ void Mesh::AddMeshComponent()
 	glEnableVertexAttribArray(0);
 
 	//NORMAL POSITION ATTRIB
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(3);
 
 	//COLOR ATTRIB
 	unsigned int colorBuffer;
 	glGenBuffers(1, &colorBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, (3*size), material.colorArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, (3 * size), material.colorArray, GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
 
@@ -77,7 +77,7 @@ void Mesh::AddMeshComponent(float* _vertices, unsigned int* _indices, unsigned i
 	unsigned int colorBuffer;
 	glGenBuffers(1, &colorBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-	glBufferData(GL_ARRAY_BUFFER, 3*size, material.colorArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 3 * size, material.colorArray, GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(1);
 
@@ -96,15 +96,14 @@ void Mesh::BindTexture(Texture _texture)
 	unsigned int textureBuffer1;
 	glGenBuffers(1, &textureBuffer1);
 	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer1);
-	glBufferData(GL_ARRAY_BUFFER, 2*size, material.textureCoods, GL_STATIC_DRAW);
-
+	glBufferData(GL_ARRAY_BUFFER, 2 * size, material.textureCoods, GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
 
-
-
-	glGenTextures(1, &material.textureId1);
-	glBindTexture(GL_TEXTURE_2D, material.textureId1);
+	//TEST
+	unsigned int freeTextureSlotIndex = FindNextTextureSlot();
+	glGenTextures(1, &material.textureIds[freeTextureSlotIndex]);
+	glBindTexture(GL_TEXTURE_2D, material.textureIds[freeTextureSlotIndex]);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -125,21 +124,16 @@ void Mesh::BindTextureWithAlpha(Texture _texture)
 	unsigned int textureBuffer2;
 	glGenBuffers(1, &textureBuffer2);
 	glBindBuffer(GL_ARRAY_BUFFER, textureBuffer2);
-	glBufferData(GL_ARRAY_BUFFER, 2*size, material.textureCoods, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 2 * size, material.textureCoods, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
 
-	if(material.textureId2 == 0)
-	{
-	glGenTextures(1, &material.textureId2);
-	glBindTexture(GL_TEXTURE_2D, material.textureId2);
-	}
-	else
-	{
-		glGenTextures(1, &material.textureId3);
-		glBindTexture(GL_TEXTURE_2D, material.textureId3);
-	}
+	//TEST
+	unsigned int freeTextureSlotIndex = FindNextTextureSlot();
+	glGenTextures(1, &material.textureIds[freeTextureSlotIndex]);
+	glBindTexture(GL_TEXTURE_2D, material.textureIds[freeTextureSlotIndex]);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -155,13 +149,25 @@ void Mesh::BindTextureWithAlpha(Texture _texture)
 void Mesh::DrawThisObject()
 {
 
-	for (int i = 0; i < 15; i++) //hardcoded value of 15 represents the maximum count of texture IDs in the material
+	for (int i = 0; i < 16; i++) //hardcoded value of 15 represents the maximum count of texture IDs in the material
 	{
 		if (material.textureIds[i] != 0)
 		{
 			glActiveTexture(GL_TEXTURE0 + i);
-			glBindTexture(GL_TEXTURE_2D,material.textureIds[i]);
+			glBindTexture(GL_TEXTURE_2D, material.textureIds[i]);
 		}
 		else return; //MAYBE REMOVE THIS LATER
 	}
+}
+
+unsigned int Mesh::FindNextTextureSlot()
+{
+	for (int i = 0; i < 16; i++)
+	{
+		if (material.textureIds[i] == 0)
+		{
+			return i;
+		}
+	}
+
 }

@@ -251,6 +251,8 @@ int main()
 
 
 
+	basicShader.Use();
+
 	// ADD MESH 
 	Mesh mesh = {};
 	mesh.vertices = vertices;
@@ -261,7 +263,6 @@ int main()
 	mesh.BindTexture(crateTexture); //TODO: STORE IMAGE INSIDE TEXTURE OBJECT
 	mesh.BindTextureWithAlpha(catTexture);
 
-	basicShader.Use();
 
 
 	//TRANSFORMATION MATRICES
@@ -317,17 +318,25 @@ int main()
 	Material standard;
 
 	basicShader.Use();
+	GLint bound;
+
 	//BIND TEXTURE TO UNIFORM LOCATION !
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1);
+	glBindTexture(GL_TEXTURE_2D, mesh.material.textureIds[0]);
+
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId2);
+	glBindTexture(GL_TEXTURE_2D, mesh.material.textureIds[1]);
+
 	glActiveTexture(GL_TEXTURE2),
-	glBindTexture(GL_TEXTURE_2D, reflector.material.textureId2);
+	glBindTexture(GL_TEXTURE_2D, reflector.material.textureIds[0]);
+
+	glGetIntegerv(GL_TEXTURE_BINDING_2D, &bound);
 	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, reflector.material.textureId3);
+	glBindTexture(GL_TEXTURE_2D, reflector.material.textureIds[1]);
 
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1); //CONTAINER WITHOUT METAL CANVAS
 
 
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "ourColor"), 1, glm::value_ptr(objectColor2));
@@ -336,8 +345,10 @@ int main()
 	//MATERIAL UNIFORMS
 	glUniform1i(glGetUniformLocation(basicShader.programID, "material.diffuse"), 2);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "material2.diffuse"), 1);
-	glUniform1i(glGetUniformLocation(basicShader.programID, "material.specular"),3);
+
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material.specular"), 3);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "material2.specular"), 3);
+
 	glUniform1f(glGetUniformLocation(basicShader.programID, "material.shininess"), texturedBoxMaterial.shininess);
 	//LIGHT UNIFORMS
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "light.ambient"), 1, glm::value_ptr(texturedBoxMaterial.lightAmbient));
@@ -420,7 +431,7 @@ int main()
 		glfwSwapBuffers(glfWindow);
 		//lightPosition = glm::vec3(1.2f + moving.x, 0.0f, 0.0f);
 
-		moving.x += direction *deltaTime;
+		moving.x += direction * deltaTime;
 		if (moving.x > 5.0f || moving.x < -5.0f)
 		{
 			direction *= -1;

@@ -100,16 +100,11 @@ public:
 			0.0f, 0.0f,
 			0.0f, 1.0f
 	};
-	//Texture* texture;
-	unsigned int textureId1 = 0;
-	unsigned int textureId2 = 0;
-	unsigned int textureId3 = 0;
+
 
 	unsigned int textureIds[16];
 
 	Texture texture;
-
-
 
 	glm::vec3 ambient = glm::vec3(1.0f);
 	glm::vec3 diffuse = ambient;

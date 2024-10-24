@@ -23,4 +23,6 @@ public:
 	void BindTextureWithAlpha(Texture _texture);
 
 	void DrawThisObject();
+
+	unsigned int FindNextTextureSlot();
 };
