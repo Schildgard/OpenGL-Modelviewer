@@ -105,6 +105,8 @@ public:
 	unsigned int textureId2 = 0;
 	unsigned int textureId3 = 0;
 
+	unsigned int textureIds[16];
+
 	Texture texture;
 
 
@@ -119,9 +121,15 @@ public:
 	glm::vec3 lightDiffuse = lightAmbient;
 	glm::vec3 lightSpecular = glm::vec3(1.0f);
 
+	//TODO: SET A REFERNCE TO THE SHADER WHICH THE MATERIAL IS SUPPOSED TO USE
 
-
-
+	Material()
+	{
+		for (int i = 0; i < 16; i++)
+		{
+			textureIds[i] = 0;
+		}
+	};
 
 
 };

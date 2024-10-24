@@ -31,14 +31,13 @@ int main()
 	Camera SceneCamera = {};
 
 	//CREATE INPUT HANDLING
-	Input input2(&SceneCamera);
-	Input::currentInstance = &input2;
+	Input input(&SceneCamera);
+	Input::currentInstance = &input;
 	glfwSetCursorPosCallback(glfWindow, Input::MouseCallback);
 	glfwSetScrollCallback(glfWindow, Input::ScrollCallback);
 	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);;
 
 	Shader basicShader("Shader/basicVertexShader.glsl", "Shader/basicFragmentShader.glsl");
-	Shader lightShader("Shader/LightingVertexShader.glsl", "Shader/LightingFragmentShader.glsl");
 	Shader lightSourceShader("Shader/LightSourceVertexShader.glsl", "Shader/LightSourceFragmentShader.glsl");
 
 	glEnable(GL_DEPTH_TEST);
@@ -242,15 +241,11 @@ int main()
 	Texture woodContainerTexture = {};
 	Texture containerSpecular = {};
 	//IMAGE 1
-	//unsigned char* crate = Texture::LoadTexture(crateTexture,"Images/container.jpg");
 	crateTexture.LoadTexture("Images/container.jpg");
 	//IMAGE 2
-	//unsigned char* cat = Texture::LoadTexture(catTexture,"Images/Garumak512.png");
 	catTexture.LoadTexture("Images/Garumak512.png");
 	//IMAGE 3
-	//unsigned char* woodenContainer = Texture::LoadTexture(woodContainerTexture,"Images/container2.png");
 	woodContainerTexture.LoadTexture("Images/container2.png");
-	//woodContainerTexture.LoadTexture("Images/Garumak512.png");
 	//IMAGE 4
 	containerSpecular.LoadTexture("Images/container2_specular.png");
 
@@ -279,17 +274,12 @@ int main()
 	unsigned int viewLoc2 = glGetUniformLocation(lightSourceShader.programID, "view");
 	unsigned int projectionLoc2 = glGetUniformLocation(lightSourceShader.programID, "projection");
 
-	unsigned int modelLoc3 = glGetUniformLocation(lightShader.programID, "model");
-	unsigned int viewLoc3 = glGetUniformLocation(lightShader.programID, "view");
-	unsigned int projectionLoc3 = glGetUniformLocation(lightShader.programID, "projection");
-
 
 
 
 
 	Light lightObject = {};
 	Light::currentInstance = &lightObject;
-	//Light::CreateLightSource(&lightObject.objectID, vertices3D, indices, sizeof(vertices3D));
 	lightObject.vertices = vertices;
 	lightObject.indices = indices;
 	lightObject.size = sizeof(vertices);
@@ -313,16 +303,6 @@ int main()
 	glm::vec3 lightPosition = glm::vec3(1.2f, 1.0f, 2.0f);
 
 
-	//MATERIAL TEST
-	Material colorBoxMaterial;
-	colorBoxMaterial.ambient = glm::vec3(1.0f, 0.5f, 0.31f);
-	colorBoxMaterial.diffuse = glm::vec3(1.0f, 0.5f, 0.31f);
-	colorBoxMaterial.specular = glm::vec3(0.5f, 0.5f, 0.5f);
-	colorBoxMaterial.shininess = 32.0f;
-
-	colorBoxMaterial.lightAmbient = glm::vec3(0.2f);
-	colorBoxMaterial.lightDiffuse = glm::vec3(0.5f);
-	colorBoxMaterial.lightSpecular = glm::vec3(0.0f);
 
 	Material texturedBoxMaterial;
 	texturedBoxMaterial.ambient = glm::vec3(1.0f);
@@ -342,7 +322,6 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1);
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId2);
-	//lightShader.Use();
 	glActiveTexture(GL_TEXTURE2),
 	glBindTexture(GL_TEXTURE_2D, reflector.material.textureId2);
 	glActiveTexture(GL_TEXTURE3);
@@ -350,9 +329,6 @@ int main()
 
 
 
-
-
-	basicShader.Use();
 
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "ourColor"), 1, glm::value_ptr(objectColor2));
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
@@ -437,7 +413,7 @@ int main()
 
 
 		//CHECK FOR INPUT
-		input2.ProcessInput(glfWindow, &SceneCamera.position, &SceneCamera.forward, &SceneCamera.upward, deltaTimePtr);
+		input.ProcessInput(glfWindow, &SceneCamera.position, &SceneCamera.forward, &SceneCamera.upward, deltaTimePtr);
 		glfwPollEvents();
 
 		//DRAW ACTUAL SCREEN

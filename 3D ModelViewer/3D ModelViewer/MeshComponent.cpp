@@ -151,3 +151,17 @@ void Mesh::BindTextureWithAlpha(Texture _texture)
 	stbi_image_free(material.texture.image);
 
 }
+
+void Mesh::DrawThisObject()
+{
+
+	for (int i = 0; i < 15; i++) //hardcoded value of 15 represents the maximum count of texture IDs in the material
+	{
+		if (material.textureIds[i] != 0)
+		{
+			glActiveTexture(GL_TEXTURE0 + i);
+			glBindTexture(GL_TEXTURE_2D,material.textureIds[i]);
+		}
+		else return; //MAYBE REMOVE THIS LATER
+	}
+}

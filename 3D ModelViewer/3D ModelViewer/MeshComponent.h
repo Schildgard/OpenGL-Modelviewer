@@ -21,4 +21,6 @@ public:
 	//TEXTURE FUNCTIONS
 	void BindTexture(Texture _texture);
 	void BindTextureWithAlpha(Texture _texture);
+
+	void DrawThisObject();
 };
