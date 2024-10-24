@@ -22,6 +22,9 @@ public:
 	void BindTexture(Texture _texture);
 	void BindTextureWithAlpha(Texture _texture);
 
+	void BindTexture(Texture _texture, bool _freeImage);
+	void BindTextureWithAlpha(Texture _texture, bool _freeImage);
+
 	void DrawThisObject();
 
 	unsigned int FindNextTextureSlot();

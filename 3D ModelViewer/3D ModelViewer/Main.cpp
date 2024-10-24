@@ -261,7 +261,25 @@ int main()
 	mesh.AddMeshComponent();
 
 	mesh.BindTexture(crateTexture); //TODO: STORE IMAGE INSIDE TEXTURE OBJECT
-	mesh.BindTextureWithAlpha(catTexture);
+	mesh.BindTextureWithAlpha(catTexture, false);
+
+
+	Mesh reflector = {};
+	reflector.vertices = vertices;
+	reflector.indices = indices;
+	reflector.size = sizeof(vertices);
+	reflector.AddMeshComponent();
+	reflector.BindTextureWithAlpha(woodContainerTexture);
+	reflector.BindTextureWithAlpha(catTexture);
+	reflector.BindTextureWithAlpha(containerSpecular);
+
+
+	Light lightObject = {};
+	Light::currentInstance = &lightObject;
+	lightObject.vertices = vertices;
+	lightObject.indices = indices;
+	lightObject.size = sizeof(vertices);
+	Light::CreateLightSource();
 
 
 
@@ -274,29 +292,6 @@ int main()
 	unsigned int modelLoc2 = glGetUniformLocation(lightSourceShader.programID, "model");
 	unsigned int viewLoc2 = glGetUniformLocation(lightSourceShader.programID, "view");
 	unsigned int projectionLoc2 = glGetUniformLocation(lightSourceShader.programID, "projection");
-
-
-
-
-
-	Light lightObject = {};
-	Light::currentInstance = &lightObject;
-	lightObject.vertices = vertices;
-	lightObject.indices = indices;
-	lightObject.size = sizeof(vertices);
-	Light::CreateLightSource();
-
-
-
-
-	Mesh reflector = {};
-	reflector.vertices = vertices;
-	reflector.indices = indices;
-	reflector.size = sizeof(vertices);
-	reflector.AddMeshComponent();
-	reflector.BindTextureWithAlpha(woodContainerTexture);
-	reflector.BindTextureWithAlpha(containerSpecular);
-
 
 	//LIGHTING SHADER ATTRIBUTES
 	glm::vec3 objectColor = glm::vec3(1.0f, 0.5f, 0.31f);
@@ -318,36 +313,16 @@ int main()
 	Material standard;
 
 	basicShader.Use();
-	GLint bound;
-
-	//BIND TEXTURE TO UNIFORM LOCATION !
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, mesh.material.textureIds[0]);
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, mesh.material.textureIds[1]);
-
-	glActiveTexture(GL_TEXTURE2),
-	glBindTexture(GL_TEXTURE_2D, reflector.material.textureIds[0]);
-
-	glGetIntegerv(GL_TEXTURE_BINDING_2D, &bound);
-	glActiveTexture(GL_TEXTURE3);
-	glBindTexture(GL_TEXTURE_2D, reflector.material.textureIds[1]);
-
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, mesh.material.textureId1); //CONTAINER WITHOUT METAL CANVAS
-
 
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "ourColor"), 1, glm::value_ptr(objectColor2));
 	glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
 
 	//MATERIAL UNIFORMS
-	glUniform1i(glGetUniformLocation(basicShader.programID, "material.diffuse"), 2);
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material.diffuse"), 0);
 	glUniform1i(glGetUniformLocation(basicShader.programID, "material2.diffuse"), 1);
 
-	glUniform1i(glGetUniformLocation(basicShader.programID, "material.specular"), 3);
-	glUniform1i(glGetUniformLocation(basicShader.programID, "material2.specular"), 3);
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material.specular"), 2);
+	glUniform1i(glGetUniformLocation(basicShader.programID, "material2.specular"), 2);
 
 	glUniform1f(glGetUniformLocation(basicShader.programID, "material.shininess"), texturedBoxMaterial.shininess);
 	//LIGHT UNIFORMS
@@ -378,9 +353,11 @@ int main()
 
 		//DRAW OBJECTS
 		basicShader.Use();
-
 		glUniform3fv(glGetUniformLocation(basicShader.programID, "light.position"), 1, glm::value_ptr(lightPosition));
 		glUniform3fv(glGetUniformLocation(basicShader.programID, "viewPosition"), 1, glm::value_ptr(SceneCamera.position));
+
+
+		reflector.DrawThisObject();
 		//SET CAMERA POSITION
 		identityMatrix.LookAt(viewLoc, SceneCamera.position, SceneCamera.forward, SceneCamera.upward);
 		identityMatrix.Zoom(projectionLoc, glm::radians(SceneCamera.fov), 800.0f / 600.0f, 0.1f, 100.0f);

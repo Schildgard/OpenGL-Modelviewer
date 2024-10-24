@@ -12,6 +12,9 @@
 class Material
 {
 public:
+
+
+
 	//COLOR
 	unsigned int size = 6*36; //SIZE IS 6*VERTEX COUNT
 	float colorArray [3*36] =
@@ -53,54 +56,6 @@ public:
 		1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,
 	};
-
-	//TEXTURE
-	unsigned int textureSize;
-	float textureCoods[2 * 36] =
-	{
-			0.0f, 0.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f,
-			1.0f, 1.0f,
-			0.0f, 1.0f,
-			0.0f, 0.0f,
-
-			0.0f, 0.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f,
-			1.0f, 1.0f,
-			0.0f, 1.0f,
-			0.0f, 0.0f,
-
-			1.0f, 0.0f,
-			1.0f, 1.0f,
-			0.0f, 1.0f,
-			0.0f, 1.0f,
-			0.0f, 0.0f,
-			1.0f, 0.0f,
-
-			1.0f, 0.0f,
-			1.0f, 1.0f,
-			0.0f, 1.0f,
-			0.0f, 1.0f,
-			0.0f, 0.0f,
-			1.0f, 0.0f,
-
-			0.0f, 1.0f,
-			1.0f, 1.0f,
-			1.0f, 0.0f,
-			1.0f, 0.0f,
-			0.0f, 0.0f,
-			0.0f, 1.0f,
-
-			0.0f, 1.0f,
-			1.0f, 1.0f,
-			1.0f, 0.0f,
-			1.0f, 0.0f,
-			0.0f, 0.0f,
-			0.0f, 1.0f
-	};
-
 
 	unsigned int textureIds[16];
 
