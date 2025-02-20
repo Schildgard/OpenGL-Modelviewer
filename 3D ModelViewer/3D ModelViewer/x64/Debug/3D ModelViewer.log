@@ -1,31 +1,6 @@
-﻿  ColorComponent.cpp
-  Input.cpp
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Input.cpp(65,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Input.cpp(66,15): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Input.cpp(72,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Input.cpp(73,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Input.cpp(75,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Input.cpp(76,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  Light.cpp
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
-  (compiling source file 'Light.cpp')
+﻿  MeshComponent.cpp
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: "e": Unreferenzierte lokale Variable
+  (Quelldatei „MeshComponent.cpp“ wird kompiliert)
   
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Light.cpp(70,15): warning C4101: 'ebo': unreferenced local variable
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Light.cpp(112,15): warning C4101: 'ebo': unreferenced local variable
-  Main.cpp
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
-  (compiling source file 'Main.cpp')
-  
-  Frame.cpp
-  Matrix.cpp
-  MeshComponent.cpp
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\BasicShader.h(47,34): warning C4101: 'e': unreferenced local variable
-  (compiling source file 'MeshComponent.cpp')
-  
-  TextureComponent.cpp
-  Generating Code...
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\TextureComponent.cpp(19,1): warning C4715: 'Texture::LoadTexture': not all control paths return a value
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\MeshComponent.cpp(279,1): warning C4715: 'Mesh::FindNextTextureSlot': not all control paths return a value
-  glad.c
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  3D ModelViewer.vcxproj -> D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\x64\Debug\3D ModelViewer.exe
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\MeshComponent.cpp(279): warning C4715: "Mesh::FindNextTextureSlot": Nicht alle Codepfade geben einen Wert zurück.
+  3D ModelViewer.vcxproj -> G:\Repository\3DModelView\3D ModelViewer\x64\Debug\3D ModelViewer.exe

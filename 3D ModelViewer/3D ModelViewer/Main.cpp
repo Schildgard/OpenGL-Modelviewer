@@ -35,7 +35,7 @@ int main()
 	Input::currentInstance = &input;
 	glfwSetCursorPosCallback(glfWindow, Input::MouseCallback);
 	glfwSetScrollCallback(glfWindow, Input::ScrollCallback);
-	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);;
+	glfwSetInputMode(glfWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	Shader basicShader("Shader/basicVertexShader.glsl", "Shader/basicFragmentShader.glsl");
 	Shader lightSourceShader("Shader/LightSourceVertexShader.glsl", "Shader/LightSourceFragmentShader.glsl");

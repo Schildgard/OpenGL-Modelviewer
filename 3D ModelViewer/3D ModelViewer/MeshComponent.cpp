@@ -227,10 +227,10 @@ void Mesh::DrawThisObject(glm::vec3 _lightPosition, Camera _SceneCamera)
 	material.assignedShader->Use();
 	glGetIntegerv(GL_CURRENT_PROGRAM, (GLint*)&currentProgram);
 	if (currentProgram == material.assignedShader->programID) {
-		std::cout << "Das korrekte Shader-Programm ist aktiv." << std::endl;
+	//	std::cout << "Correct ShaderProgramm" << std::endl;
 	}
 	else {
-		std::cout << "Ein anderes Shader-Programm ist aktiv." << std::endl;
+		std::cout << "Wrong Shader Program." << std::endl;
 	}
 
 

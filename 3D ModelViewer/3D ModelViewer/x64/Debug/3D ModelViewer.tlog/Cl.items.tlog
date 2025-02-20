@@ -1,9 +1,9 @@
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\ColorComponent.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\ColorComponent.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\glad.c;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\glad.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Input.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\Input.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Light.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\Light.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Main.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\Main.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Frame.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\Frame.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\Matrix.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\Matrix.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\MeshComponent.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\MeshComponent.obj
-D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\TextureComponent.cpp;D:\Leon Depository\OpenGL-Modelviewer\3D ModelViewer\3D ModelViewer\x64\Debug\TextureComponent.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\ColorComponent.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\ColorComponent.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\glad.c;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\glad.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Input.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Input.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Light.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Light.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Main.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Main.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Frame.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Frame.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\Matrix.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\Matrix.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\MeshComponent.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\MeshComponent.obj
+G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\TextureComponent.cpp;G:\Repository\3DModelView\3D ModelViewer\3D ModelViewer\x64\Debug\TextureComponent.obj
